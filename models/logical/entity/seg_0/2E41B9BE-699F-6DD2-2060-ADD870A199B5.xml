@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2E41B9BE-699F-6DD2-2060-ADD870A199B5" name="TYP_SEKTORA">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:14:19 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_typu" id="A1243D44-7F5B-5E2A-046A-74266C2F8E36">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:14:29 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nazwa" id="CB57777E-7E00-5B81-E12D-E8008D027692">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:14:48 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>30 CHAR</dataTypeSize>
+<ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="opis" id="23BB6033-F9A3-CE22-3C99-1FAE5ECA41E5">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:15:04 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>150 CHAR</dataTypeSize>
+<ownDataTypeParameters>150 CHAR,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="8659247C-05A5-DF42-F721-79D079B50AEE" name="TYPY_SEKTOROW PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:14:46 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>A1243D44-7F5B-5E2A-046A-74266C2F8E36</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

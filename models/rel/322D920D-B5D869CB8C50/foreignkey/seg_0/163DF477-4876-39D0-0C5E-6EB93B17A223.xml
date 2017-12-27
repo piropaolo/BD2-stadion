@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="163DF477-4876-39D0-0C5E-6EB93B17A223" containerWithKeyObject="07C70D76-5A59-EB3C-F953-AC66CE40EFF7" localFKIndex="0C2F2288-EF83-48D0-2918-EB950535D369" name="IMPREZY_STADIONY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>290DC7BE-DF1A-D677-1AC2-F7974D325B3A</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<referredTableLongName>STADIONY</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>60E48382-DA8E-2007-77D1-78A93CB037D9</referredTableID>
+<keyObject>A4BDDDC3-3918-4108-15DE-947728943957</keyObject>
+<referredKeyID>A4BDDDC3-3918-4108-15DE-947728943957</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_stadionu</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -1,0 +1,86 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E6185ED7-2C2D-BF69-C479-CBAB11EB47F8" name="REZERWACJE">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>3244519B-F2FD-99B0-EC7C-AA1B754BFB48</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<ordsAlias>rezerwacja</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_rezerwacji" id="ACF29326-8BA3-B0FE-5FA3-75FE1F1D6045">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>F1280B10-E8B1-8721-59C8-4E65501C2FAE</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="data" id="6A5460AD-F8A0-4798-9DCB-AF821F00F45D">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>CE669D4F-019E-EBCD-BD84-9A6AD4E07B34</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="okres" id="DB1AC928-F1E9-4A17-C8F3-7FCB6569305D">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>5FCF3A4A-66F7-6BD2-F2F7-B33EB56ED929</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_klienta" id="3CC3C778-A458-8798-8D1F-D37C0DED2BDC">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>A95F2A1D-2A4C-936B-48F8-B88C3BDCC6F0</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="42E0A02E-A73E-33BA-960C-0EF1612F545D" referredColumn="675EE78A-338A-D1DF-72BB-3F606A38BD1A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="F06DB8F7-9D44-C6CD-66CF-05382E6C54F6" name="REZERWACJE_PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>A2CD661A-D490-6D66-F915-5CA0DDAE52BE</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="ACF29326-8BA3-B0FE-5FA3-75FE1F1D6045"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9E576008-F5F9-4032-8026-F1519D1E4050" name="REZERWACJE_KLIENCI_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>0B653744-FD89-0B38-FB03-342FF7058AD9</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3CC3C778-A458-8798-8D1F-D37C0DED2BDC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

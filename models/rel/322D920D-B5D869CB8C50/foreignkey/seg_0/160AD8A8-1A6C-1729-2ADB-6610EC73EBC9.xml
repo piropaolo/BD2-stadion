@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="160AD8A8-1A6C-1729-2ADB-6610EC73EBC9" containerWithKeyObject="9D122B73-4029-1C72-442E-888FF25580AC" localFKIndex="47FB5A1A-972B-BAE3-AE19-0637BB283D46" name="MIEJSCA_SEKTORY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>F3B61C24-B576-FBBB-1EFF-057C08517D2C</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<referredTableLongName>SEKTORY</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>0F61FD87-4ABB-2311-E430-6A5CAD2009A5</referredTableID>
+<keyObject>87DC1145-087D-64AA-1B7C-9A0A9BA16353</keyObject>
+<referredKeyID>87DC1145-087D-64AA-1B7C-9A0A9BA16353</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_stadionu,id_sektora</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

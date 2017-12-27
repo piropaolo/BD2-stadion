@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="09CA4382-12DC-FC41-2578-91D7DDD36275" name="MIEJSCE">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:10:03 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_stadionu" id="F664BC46-D0FF-DA63-E39C-4B866AFBAFDE">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:17:11 UTC</createdTime>
+<generatorID>F3B61C24-B576-FBBB-1EFF-057C08517D2C</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>389A18FC-477B-E833-8052-8B94178E8C2E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_sektora" id="A6C60B26-3A45-CFAA-0F2C-921A1FF884E4">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:13:20 UTC</createdTime>
+<generatorID>F3B61C24-B576-FBBB-1EFF-057C08517D2C</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>8AD73D1A-8610-93F9-FECF-C8F80DAB7795</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="rzad" id="E2F233A5-206C-D5FA-04D4-D85A937D08D3">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:10:13 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nr_miejsca" id="77B42F1D-AC1D-4973-7954-C259B58B07B4">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:10:24 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="B08FA467-9F33-7967-3815-432E9FBBA85E" name="MIEJSCA PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:10:22 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>E2F233A5-206C-D5FA-04D4-D85A937D08D3</attributeRef>
+<attributeRef>77B42F1D-AC1D-4973-7954-C259B58B07B4</attributeRef>
+<attributeRef>A6C60B26-3A45-CFAA-0F2C-921A1FF884E4</attributeRef>
+<attributeRef>F664BC46-D0FF-DA63-E39C-4B866AFBAFDE</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

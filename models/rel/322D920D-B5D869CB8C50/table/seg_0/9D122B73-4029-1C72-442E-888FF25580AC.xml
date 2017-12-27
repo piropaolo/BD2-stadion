@@ -1,0 +1,94 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="9D122B73-4029-1C72-442E-888FF25580AC" name="MIEJSCA">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>09CA4382-12DC-FC41-2578-91D7DDD36275</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<ordsAlias>miejsce</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="rzad" id="9DC90191-CEB1-2CB1-F971-1885D839AC9F">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>E2F233A5-206C-D5FA-04D4-D85A937D08D3</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nr_miejsca" id="055E4257-ECFE-553C-A254-1E176A0297CA">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>77B42F1D-AC1D-4973-7954-C259B58B07B4</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_sektora" id="6A690119-66AA-9A7C-5759-F7FF9EA74DB6">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>A6C60B26-3A45-CFAA-0F2C-921A1FF884E4</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="160AD8A8-1A6C-1729-2ADB-6610EC73EBC9" referredColumn="35CEA0A1-806E-004F-F02E-0DC8DA1FCCF0"/>
+</associations>
+</Column>
+<Column name="id_stadionu" id="E2287737-1918-3140-F756-934A3045073A">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>F664BC46-D0FF-DA63-E39C-4B866AFBAFDE</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="160AD8A8-1A6C-1729-2ADB-6610EC73EBC9" referredColumn="60E8EC77-ABE7-5133-C107-D8DF3D6D2F49"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DC8BDBF0-19BD-C1FD-4623-4A5D30984C5A" name="MIEJSCA_PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>B08FA467-9F33-7967-3815-432E9FBBA85E</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E2287737-1918-3140-F756-934A3045073A"/>
+<colUsage columnID="6A690119-66AA-9A7C-5759-F7FF9EA74DB6"/>
+<colUsage columnID="9DC90191-CEB1-2CB1-F971-1885D839AC9F"/>
+<colUsage columnID="055E4257-ECFE-553C-A254-1E176A0297CA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="47FB5A1A-972B-BAE3-AE19-0637BB283D46" name="MIEJSCA_SEKTORY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>F3B61C24-B576-FBBB-1EFF-057C08517D2C</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E2287737-1918-3140-F756-934A3045073A"/>
+<colUsage columnID="6A690119-66AA-9A7C-5759-F7FF9EA74DB6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -1,0 +1,123 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6DC960E7-AB45-4BD8-3470-2971036BE6F0" name="KARNET">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:36:59 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_karnetu" id="AC6923B3-7906-FFAF-549A-6B80A8C1DE4F">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 23:13:45 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="data_wystawienia" id="11A1E5F3-54AF-38DF-0714-39A87E6A9529">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:44:41 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="data_waznosci" id="17CCAA1B-71A3-D308-E639-8E26E1EFD4FC">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:44:41 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cena" id="5DC06199-621B-D8F6-26AE-DA5CB44E7ABB">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:45:05 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_typu" id="D95C0D38-18CD-084F-F6A7-314AD304DFEE">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 22:13:53 UTC</createdTime>
+<generatorID>7D54B9AC-29D8-D714-9328-C5FAA7D1D458</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>D74CB0B8-DC0E-A7E1-8428-360966232AA6</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_klienta" id="9BB06BFC-B86C-CAF6-2FE9-C147654DA82A">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 23:06:14 UTC</createdTime>
+<generatorID>607910E8-5639-DD59-99FA-DC06F5921470</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>4E1AC13F-8C58-DC0E-0A95-2A12C531C59B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_typu1" id="1574BF4B-6CB2-2EA7-AD7B-D75C2FFC6603">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 15:01:13 UTC</createdTime>
+<generatorID>89280AF1-8816-64AA-DE09-943EB1DF5DE8</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>7B2415B2-271D-538A-1050-A5690373D421</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="09684CB3-FF79-E794-8677-E590742457EE" name="KARNET PK">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 22:13:53 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>AC6923B3-7906-FFAF-549A-6B80A8C1DE4F</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

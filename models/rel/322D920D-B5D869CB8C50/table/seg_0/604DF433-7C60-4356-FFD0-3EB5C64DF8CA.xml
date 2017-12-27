@@ -1,0 +1,185 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="604DF433-7C60-4356-FFD0-3EB5C64DF8CA" name="BILETY">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>26BDF452-87A9-ADAC-D718-F28DB1F8B775</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<ordsAlias>bilet</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_imprezy" id="EF52E274-4A98-90E1-1A34-7D57224F52BB">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>B2A11C49-7724-C737-3C6E-C0671820DE19</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="4E6D80E5-AE54-354F-804C-02708601CD00" referredColumn="9E4C409E-FA20-9B05-1E71-B6F0D47C72D9"/>
+</associations>
+</Column>
+<Column name="id_stadionu" id="30B9B3C8-7E03-74C9-16FE-5BE429598C2A">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:16:38 UTC</createdTime>
+<generatorID>B03883FF-EF7E-BC01-655A-2BD1F427A974</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="62655C8C-E6BE-BCEA-57FB-B757A2F7F72D" referredColumn="E2287737-1918-3140-F756-934A3045073A"/>
+</associations>
+</Column>
+<Column name="id_sektora" id="BEE16CA3-0867-E2F8-9FA0-48C5B1959737">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:16:38 UTC</createdTime>
+<generatorID>1EBBCBDD-B70B-864E-3ACA-05731CDC0CDD</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="62655C8C-E6BE-BCEA-57FB-B757A2F7F72D" referredColumn="6A690119-66AA-9A7C-5759-F7FF9EA74DB6"/>
+</associations>
+</Column>
+<Column name="rzad" id="15FB2DFF-CC46-CAE2-938B-4AF9566E4A51">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:16:38 UTC</createdTime>
+<generatorID>DC1CF00D-E238-05D4-0B91-C4E070953FCC</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="62655C8C-E6BE-BCEA-57FB-B757A2F7F72D" referredColumn="9DC90191-CEB1-2CB1-F971-1885D839AC9F"/>
+</associations>
+</Column>
+<Column name="nr_miejsca" id="FB20A23B-A9EB-7516-C860-74955B2DE6AE">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:16:38 UTC</createdTime>
+<generatorID>63DBD6B7-8FEB-047A-60D4-9EA8818DB071</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="62655C8C-E6BE-BCEA-57FB-B757A2F7F72D" referredColumn="055E4257-ECFE-553C-A254-1E176A0297CA"/>
+</associations>
+</Column>
+<Column name="id_rezerwacji" id="43AE39E7-6622-D048-9EC1-79258D0BF16F">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>01EBB51F-F93A-EDCF-4471-CAC04B922B7F</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BC2D7C72-48B1-F049-077D-63AB831E41BC" referredColumn="ACF29326-8BA3-B0FE-5FA3-75FE1F1D6045"/>
+</associations>
+</Column>
+<Column name="id_zakupu" id="3B9CB47B-C850-6127-8296-501E18EC9382">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>C7DDC429-AF11-D041-49D0-C0281A73675F</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A8623412-2403-534A-FDB2-EEA629EB8D67" referredColumn="70BAAF15-E786-B4CA-2FB7-EEA0C4E4ABD1"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="9E554FD8-37BA-77FD-E002-DD5A0206096D" name="BILETY_PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>39DE5781-C6BC-7422-C9F2-33CBA8EE0746</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EF52E274-4A98-90E1-1A34-7D57224F52BB"/>
+<colUsage columnID="30B9B3C8-7E03-74C9-16FE-5BE429598C2A"/>
+<colUsage columnID="BEE16CA3-0867-E2F8-9FA0-48C5B1959737"/>
+<colUsage columnID="15FB2DFF-CC46-CAE2-938B-4AF9566E4A51"/>
+<colUsage columnID="FB20A23B-A9EB-7516-C860-74955B2DE6AE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="643F5839-F868-27A8-CACA-937DFCEA886C" name="BILETY_IMPREZY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>F18BDB69-6C36-36EA-EDDD-27898EAA6795</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EF52E274-4A98-90E1-1A34-7D57224F52BB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="6CE93ADC-40EF-E349-C953-586A034EDB58" name="BILETY_REZERWACJE_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>EA9EFC0B-B015-7242-7B2D-D4F90001ADA4</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="43AE39E7-6622-D048-9EC1-79258D0BF16F"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="78E1BF80-B0B7-48A9-3994-3ABBEF2F1BE1" name="BILETY_ZAKUPY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>99A39798-3733-BBD7-7852-C77C66FCD2D1</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="3B9CB47B-C850-6127-8296-501E18EC9382"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="87FF2558-6A6F-EB49-0079-F4904F1AEF27" name="BILETY_MIEJSCA_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:16:38 UTC</createdTime>
+<generatorID>E23DA272-A12D-4E15-D03B-933D342CB589</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="30B9B3C8-7E03-74C9-16FE-5BE429598C2A"/>
+<colUsage columnID="BEE16CA3-0867-E2F8-9FA0-48C5B1959737"/>
+<colUsage columnID="15FB2DFF-CC46-CAE2-938B-4AF9566E4A51"/>
+<colUsage columnID="FB20A23B-A9EB-7516-C860-74955B2DE6AE"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

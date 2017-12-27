@@ -1,0 +1,148 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="8D002A5D-8521-4AC5-8DA9-87566196EE4E" name="KARNET">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>6DC960E7-AB45-4BD8-3470-2971036BE6F0</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_karnetu" id="95F28B14-71F7-F9B6-989E-DD3B20529FD5">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>AC6923B3-7906-FFAF-549A-6B80A8C1DE4F</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="data_wystawienia" id="E0F896C6-7578-9B66-4C79-037683F50581">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>11A1E5F3-54AF-38DF-0714-39A87E6A9529</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="data_waznosci" id="0886A29B-9CAE-BDEA-75B9-FAE9E06B6DD2">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>17CCAA1B-71A3-D308-E639-8E26E1EFD4FC</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="cena" id="1C5D6166-A718-F987-84C7-DCD88F617F6E">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>5DC06199-621B-D8F6-26AE-DA5CB44E7ABB</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_klienta" id="52329753-2074-1BF7-B84B-739DEA032C64">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>9BB06BFC-B86C-CAF6-2FE9-C147654DA82A</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="87A0EE52-C6FF-6396-FB41-531483DB3BBA" referredColumn="675EE78A-338A-D1DF-72BB-3F606A38BD1A"/>
+</associations>
+</Column>
+<Column name="id_typu_klienta" id="EE16AF99-9050-F699-0385-4B259C5A9B54">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>D95C0D38-18CD-084F-F6A7-314AD304DFEE</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="01220E31-4CCA-33B6-2A7C-6122BF42E08D" referredColumn="1134B5F9-B19D-E36B-7D67-E7CCAA326B57"/>
+</associations>
+</Column>
+<Column name="id_typu_karnetu" id="1007BD4B-9A4A-46B9-94B9-0421BB9F3ED4">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 15:11:35 UTC</createdTime>
+<generatorID>1574BF4B-6CB2-2EA7-AD7B-D75C2FFC6603</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C346FF0B-F14B-8103-862B-6AB838766E71" referredColumn="011937EA-3017-C31C-92D3-8B9A89A36360"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="879A24AD-3BCC-4E86-143E-6DFF35449A2D" name="KARNETY_PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>09684CB3-FF79-E794-8677-E590742457EE</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="95F28B14-71F7-F9B6-989E-DD3B20529FD5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="61D52711-E4E8-1436-16AB-4CE98BD3E35E" name="KARNETY_KLIENCI_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>607910E8-5639-DD59-99FA-DC06F5921470</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="52329753-2074-1BF7-B84B-739DEA032C64"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1521E6C1-79C3-56E6-6D56-37D8058812A1" name="KARNETY_TYPY_KLIENTOW_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>7D54B9AC-29D8-D714-9328-C5FAA7D1D458</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EE16AF99-9050-F699-0385-4B259C5A9B54"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B62D088A-EB16-6246-49F0-C077C83B1454" name="KARNET_TYP_KARNETU_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 15:11:35 UTC</createdTime>
+<generatorID>89280AF1-8816-64AA-DE09-943EB1DF5DE8</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1007BD4B-9A4A-46B9-94B9-0421BB9F3ED4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

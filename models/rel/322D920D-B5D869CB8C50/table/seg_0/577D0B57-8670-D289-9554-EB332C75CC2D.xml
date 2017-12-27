@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="577D0B57-8670-D289-9554-EB332C75CC2D" name="ZAKUPY">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>4020CBD3-730B-EF2D-8A18-DACD5F4B05C1</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<ordsAlias>zakup</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_zakupu" id="70BAAF15-E786-B4CA-2FB7-EEA0C4E4ABD1">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>F45ACADB-64A1-9559-33E0-D34DEB91F06E</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="data" id="EA6422E2-35E9-9B1A-8040-3D4C3DA5E2D3">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>4AD9BFA1-BF08-28C8-EE9C-395FDEA00757</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_klienta" id="51F60340-2806-35A3-4A8A-49666E0974EB">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>2442CF12-9E6E-CB33-4B60-1D794AD57171</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F7C95CCD-03EC-3E7E-8B73-67F05224E848" referredColumn="675EE78A-338A-D1DF-72BB-3F606A38BD1A"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="6D7CF586-0EF9-FE73-0DF6-E926A24BBE9F" name="ZAKUPY_PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>77D1E2E3-0F71-A173-58C1-7FF47D81B883</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="70BAAF15-E786-B4CA-2FB7-EEA0C4E4ABD1"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="074ED278-E0D5-94DE-0AE0-E2DC53DF60BD" name="ZAKUPY_KLIENCI_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>42B69C11-291D-F973-BD77-F6345C7AAE56</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="51F60340-2806-35A3-4A8A-49666E0974EB"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

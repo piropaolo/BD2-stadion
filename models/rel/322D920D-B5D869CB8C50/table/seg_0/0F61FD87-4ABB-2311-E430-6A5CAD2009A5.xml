@@ -1,0 +1,91 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0F61FD87-4ABB-2311-E430-6A5CAD2009A5" name="SEKTORY">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>3A2A341E-B2B2-55CC-6611-E4D1D70BEA52</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<ordsAlias>sektor</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_sektora" id="35CEA0A1-806E-004F-F02E-0DC8DA1FCCF0">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>8AD73D1A-8610-93F9-FECF-C8F80DAB7795</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="id_typu" id="F8E29CD3-168B-8365-1925-2C42962A11AA">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>DF33DA37-C668-65E0-D0F0-6BF8AC2E47F2</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="2FE484FC-93BD-8CA5-F109-2DB1CAC41EF8" referredColumn="AD943332-8705-AC13-D113-AE7F1AA1B724"/>
+</associations>
+</Column>
+<Column name="id_stadionu" id="60E8EC77-ABE7-5133-C107-D8DF3D6D2F49">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>389A18FC-477B-E833-8052-8B94178E8C2E</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="76F9F0FA-51DB-220C-5851-A7C56F8C4CB5" referredColumn="4C1A5DC8-4FA1-79BA-E8F6-128188C7150C"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="87DC1145-087D-64AA-1B7C-9A0A9BA16353" name="SEKTORY_PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>D6B5B5D2-A846-6FE6-FAA5-93B891FD5991</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="60E8EC77-ABE7-5133-C107-D8DF3D6D2F49"/>
+<colUsage columnID="35CEA0A1-806E-004F-F02E-0DC8DA1FCCF0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="060BF23B-5C44-7D12-EF72-3C61F1DE562D" name="SEKTORY_TYPY_SEKTOROW_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>BFF793DE-42EF-6CD5-CBBF-3277B5311EF6</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F8E29CD3-168B-8365-1925-2C42962A11AA"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="24091580-9C7D-2330-00E0-EB3A2B326D59" name="SEKTORY_STADIONY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>400D5692-3CF9-431E-CBA2-DB7EA330EECB</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="60E8EC77-ABE7-5133-C107-D8DF3D6D2F49"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

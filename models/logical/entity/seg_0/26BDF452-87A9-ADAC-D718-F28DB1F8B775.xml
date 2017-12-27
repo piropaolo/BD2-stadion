@@ -1,0 +1,139 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="26BDF452-87A9-ADAC-D718-F28DB1F8B775" name="BILET">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:30:42 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_imprezy" id="B2A11C49-7724-C737-3C6E-C0671820DE19">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:47:59 UTC</createdTime>
+<generatorID>F18BDB69-6C36-36EA-EDDD-27898EAA6795</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>9349C425-6CBC-C4AE-22F6-E7FECBAB32A2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nr_miejsca" id="63DBD6B7-8FEB-047A-60D4-9EA8818DB071">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:15:59 UTC</createdTime>
+<generatorID>E23DA272-A12D-4E15-D03B-933D342CB589</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>77B42F1D-AC1D-4973-7954-C259B58B07B4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_rezerwacji" id="01EBB51F-F93A-EDCF-4471-CAC04B922B7F">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:57:56 UTC</createdTime>
+<generatorID>EA9EFC0B-B015-7242-7B2D-D4F90001ADA4</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>F1280B10-E8B1-8721-59C8-4E65501C2FAE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_zakupu" id="C7DDC429-AF11-D041-49D0-C0281A73675F">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 23:10:13 UTC</createdTime>
+<generatorID>99A39798-3733-BBD7-7852-C77C66FCD2D1</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>F45ACADB-64A1-9559-33E0-D34DEB91F06E</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="rzad" id="DC1CF00D-E238-05D4-0B91-C4E070953FCC">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:15:59 UTC</createdTime>
+<generatorID>E23DA272-A12D-4E15-D03B-933D342CB589</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>E2F233A5-206C-D5FA-04D4-D85A937D08D3</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_sektora" id="1EBBCBDD-B70B-864E-3ACA-05731CDC0CDD">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:15:59 UTC</createdTime>
+<generatorID>E23DA272-A12D-4E15-D03B-933D342CB589</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>A6C60B26-3A45-CFAA-0F2C-921A1FF884E4</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_stadionu" id="B03883FF-EF7E-BC01-655A-2BD1F427A974">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 12:15:59 UTC</createdTime>
+<generatorID>E23DA272-A12D-4E15-D03B-933D342CB589</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>F664BC46-D0FF-DA63-E39C-4B866AFBAFDE</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="39DE5781-C6BC-7422-C9F2-33CBA8EE0746" name="BILET PK">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-21 21:47:59 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>B2A11C49-7724-C737-3C6E-C0671820DE19</attributeRef>
+<attributeRef>DC1CF00D-E238-05D4-0B91-C4E070953FCC</attributeRef>
+<attributeRef>63DBD6B7-8FEB-047A-60D4-9EA8818DB071</attributeRef>
+<attributeRef>1EBBCBDD-B70B-864E-3ACA-05731CDC0CDD</attributeRef>
+<attributeRef>B03883FF-EF7E-BC01-655A-2BD1F427A974</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

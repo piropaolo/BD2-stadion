@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="4E6D80E5-AE54-354F-804C-02708601CD00" containerWithKeyObject="604DF433-7C60-4356-FFD0-3EB5C64DF8CA" localFKIndex="643F5839-F868-27A8-CACA-937DFCEA886C" name="BILETY_IMPREZY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>F18BDB69-6C36-36EA-EDDD-27898EAA6795</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<referredTableLongName>IMPREZY</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>07C70D76-5A59-EB3C-F953-AC66CE40EFF7</referredTableID>
+<keyObject>01BAA7A7-7156-5DB3-8D02-C38C0D59C5B3</keyObject>
+<referredKeyID>01BAA7A7-7156-5DB3-8D02-C38C0D59C5B3</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_imprezy</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

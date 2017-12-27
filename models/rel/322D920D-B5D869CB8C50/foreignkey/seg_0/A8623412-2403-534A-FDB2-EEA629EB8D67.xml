@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="A8623412-2403-534A-FDB2-EEA629EB8D67" containerWithKeyObject="604DF433-7C60-4356-FFD0-3EB5C64DF8CA" localFKIndex="78E1BF80-B0B7-48A9-3994-3ABBEF2F1BE1" name="BILETY_ZAKUPY_FK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-22 11:59:33 UTC</createdTime>
+<generatorID>99A39798-3733-BBD7-7852-C77C66FCD2D1</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<referredTableLongName>ZAKUPY</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>577D0B57-8670-D289-9554-EB332C75CC2D</referredTableID>
+<keyObject>6D7CF586-0EF9-FE73-0DF6-E926A24BBE9F</keyObject>
+<referredKeyID>6D7CF586-0EF9-FE73-0DF6-E926A24BBE9F</referredKeyID>
+<mandatory>false</mandatory>
+<refColNames>id_zakupu</refColNames>
+<transferable>false</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

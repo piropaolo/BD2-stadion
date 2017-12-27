@@ -1,0 +1,77 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6D2D9C4E-E4C6-2A94-B39C-77FCBB825B48" name="CENA">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:18:18 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_imprezy" id="11C441A5-CF71-EBB5-9A2D-1D3CDAE5CA8C">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:22:48 UTC</createdTime>
+<generatorID>76CD56A4-D0CE-FB31-8F0F-A86E6FE053E1</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>9349C425-6CBC-C4AE-22F6-E7FECBAB32A2</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_typu" id="21509963-AF78-8AE0-7629-752E249C890E">
+<createdBy>zamoj</createdBy>
+<createdTime>2017-12-22 12:55:50 UTC</createdTime>
+<generatorID>E6F48F3E-AD31-372D-41F8-4A07DCE6EB68</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<referedAttribute>A1243D44-7F5B-5E2A-046A-74266C2F8E36</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="cena" id="B942EEF2-FDDF-A8E3-A38F-1BD39B882312">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:18:23 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="E30AEC9F-C779-287B-8427-9DDADD9A0CE5" name="CENA PK">
+<createdBy>koraxiss</createdBy>
+<createdTime>2017-12-21 19:18:56 UTC</createdTime>
+<ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>11C441A5-CF71-EBB5-9A2D-1D3CDAE5CA8C</attributeRef>
+<attributeRef>21509963-AF78-8AE0-7629-752E249C890E</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>
