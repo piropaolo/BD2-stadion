@@ -1,11 +1,13 @@
 SET DEFINE OFF;
 
-DELETE FROM STADIONY;
-DELETE FROM SEKTORY;
-DELETE FROM TYPY_SEKTOROW;
-DELETE FROM IMPREZY;
-DELETE FROM TYPY_IMPREZ;
 DELETE FROM MIEJSCA;
+DELETE FROM SEKTORY;
+DELETE FROM STADIONY;
+DELETE FROM IMPREZY;
+DELETE FROM TYPY_SEKTOROW;
+DELETE FROM TYPY_IMPREZ;
+DELETE FROM TYPY_KLIENTOW;
+DELETE FROM CENA;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
@@ -18,11 +20,13 @@ DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
 DROP trigger INCREMENT_typy_sektorow_ID;
 DROP trigger create_msc_aft_ins_sektor;
+drop trigger create_ceny_aft_ins_imprezy;
 
 DROP procedure wstaw_do_typy_sektorow;
 DROP procedure wstaw_do_stadiony;
 DROP procedure wstaw_do_typy_imprez;
 DROP procedure wstaw_do_imprezy;
+DROP procedure wstaw_do_typy_klientow;
 
 /*SEKWENCJE*/
 CREATE SEQUENCE dept_seq START WITH 1;
@@ -109,15 +113,64 @@ BEGIN
 END;
 /
 
+create or replace TRIGGER create_ceny_aft_ins_imprezy
+AFTER INSERT ON IMPREZY
+FOR EACH ROW
+DECLARE
+prize1 NUMBER(20,2);
+prize2 NUMBER(20,2);
+prize3 NUMBER(20,2);
+BEGIN
+    if :new.id_typu = 1 then
+        prize1 := round(dbms_random.value(200,400),2);
+        prize2 := round(dbms_random.value(150,200),2);
+        prize3 := round(dbms_random.value(100,150),2);
+		INSERT INTO CENA VALUES(prize1,1,:new.ID_IMPREZY,:new.id_typu);
+        INSERT INTO CENA VALUES(prize2,2,:new.id_imprezy,:new.id_typu);
+        INSERT INTO CENA VALUES(prize3,3,:new.id_imprezy,:new.id_typu);
+    end if;
+
+    if :new.id_typu = 2 then
+        prize1 := round(dbms_random.value(150,250),2);
+        prize2 := round(dbms_random.value(80,150),2);
+        prize3 := round(dbms_random.value(50,80),2);
+		INSERT INTO CENA VALUES(prize1,1,:new.id_imprezy,:new.id_typu);
+        INSERT INTO CENA VALUES(prize2,2,:new.id_imprezy,:new.id_typu);
+        INSERT INTO CENA VALUES(prize3,3,:new.id_imprezy,:new.id_typu);
+    end if;
+
+    if :new.id_typu = 3 then
+        prize1 := round(dbms_random.value(100,200),2);
+        prize2 := round(dbms_random.value(80,100),2);
+        prize3 := round(dbms_random.value(40,80),2);
+		INSERT INTO CENA VALUES(prize1,1,:new.id_imprezy,:new.id_typu);
+        INSERT INTO CENA VALUES(prize2,2,:new.id_imprezy,:new.id_typu);
+        INSERT INTO CENA VALUES(prize3,3,:new.id_imprezy,:new.id_typu);
+    end if;
+  DBMS_OUTPUT.put_line('Dodano wszystkie ceny dla imprezy.');
+END;
+/
+
 /*PROCEDURY*/
 create or replace PROCEDURE wstaw_do_typy_sektorow
 IS
 BEGIN
-    INSERT INTO typy_sektorow VALUES (1, 'test_typ1','test_opis1');
-    INSERT INTO typy_sektorow VALUES (2, 'test_typ2','test_opis2');
-    INSERT INTO typy_sektorow VALUES (3, 'test_typ3','test_opis3');
+    INSERT INTO typy_sektorow VALUES (1, 'TYP 1','test_opis1');
+    INSERT INTO typy_sektorow VALUES (2, 'TYP 2','test_opis2');
+    INSERT INTO typy_sektorow VALUES (3, 'TYP 3','test_opis3');
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy sektorów.');
+END;
+/
+
+create or replace PROCEDURE wstaw_do_typy_klientow
+IS
+BEGIN
+    INSERT INTO typy_klientow VALUES (1, 'Normalny',0,'Nie przysluguje znizka');
+    INSERT INTO typy_klientow VALUES (2, 'Dziecko',50,'50% zniżki: Dziecko do lat 12');
+    INSERT INTO typy_klientow VALUES (3, 'Emeryt',70,'70% zniżki: Po osiegnieciu wieku emerytalnego: 60 lat dla kobiet, 65 lat dla mężczyzn');
+    INSERT INTO typy_klientow VALUES (4, 'Kompatant',95,'90% zniżki: Dla kompatantow wojennych');
+	DBMS_OUTPUT.put_line('Dodano wszystkie typy klientów.');
 END;
 /
 
@@ -133,7 +186,7 @@ BEGIN
 	'FirstEnergy', 'Supervalu', 'Ball', 'Newmont Mining', 'Pitney Bowes', 'Eaton', 'Apollo Group', 'St. Jude Medical', 'Oneok', 'Nucor', 'Cameron International', 'Amgen', 'SPX', 'United Services Automobile Assn.', 'INTL FCStone', 'Regions Financial', 'Avaya', 'Southwest Airlines', 'State Farm Insurance Cos.', 'Omnicare', 'KeyCorp');
 	qname := name.count;
 	FOR i IN 1..2 LOOP
-		INSERT INTO stadiony VALUES (1, name(1));
+		INSERT INTO stadiony VALUES (i, name(i));
 	END LOOP;
 	DBMS_OUTPUT.put_line('Dodano wszystkie stadiony.');
 END;
@@ -188,14 +241,9 @@ END;
 /*KOLEJNOSC WYWOŁYWANIA PROCEDUR
     1.WSTAW DO TYPY SEKTORÓW
     2.WSTAW DO TYPY IMPREZ
-    3.WSTAW DO STADIONY
-    4.WSTAW DO IMPREZY
+    4.WSTAW DO TYPY KLIENTÓW
+    5.WSTAW DO STADIONY
+    6.WSTAW DO IMPREZY
 */
 
-SELECT * FROM typy_sektorow;
-SELECT * FROM STADIONY ORDER BY ID_STADIONU;
-SELECT * FROM SEKTORY ORDER BY ID_STADIONU;
-SELECT COUNT(*) FROM STADIONY;
-    SELECT COUNT(*) FROM MIEJSCA WHERE id_sektora=6;
-SELECT * FROM IMPREZY ORDER BY ID_STADIONU;
 
