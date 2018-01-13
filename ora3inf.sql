@@ -5,6 +5,7 @@ DELETE FROM SEKTORY;
 DELETE FROM TYPY_SEKTOROW;
 DELETE FROM IMPREZY;
 DELETE FROM TYPY_IMPREZ;
+DELETE FROM MIEJSCA;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
@@ -16,6 +17,7 @@ DROP trigger create_sek_aft_ins_stadiony;
 DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
 DROP trigger INCREMENT_typy_sektorow_ID;
+DROP trigger create_msc_aft_ins_sektor;
 
 DROP procedure wstaw_do_typy_sektorow;
 DROP procedure wstaw_do_stadiony;
@@ -73,6 +75,37 @@ BEGIN
         
   END LOOP;
   DBMS_OUTPUT.put_line('Dodano wszystkie sektory.');
+END;
+/
+
+create or replace TRIGGER create_msc_aft_ins_sektor
+AFTER INSERT ON SEKTORY
+FOR EACH ROW
+BEGIN
+  if :new.id_typu = 1 then 
+    for i in 1..50 LOOP
+        FOR j IN 1..100 LOOP
+            INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
+        END LOOP;
+    END LOOP;
+  end if;
+  
+  if :new.id_typu = 2 then 
+    for i in 1..100 LOOP
+        FOR j IN 1..100 LOOP
+            INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
+        END LOOP;
+    END LOOP;
+  end if;
+  
+  if :new.id_typu = 3 then 
+    for i in 1..50 LOOP
+        FOR j IN 1..100 LOOP
+            INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
+        END LOOP;
+    END LOOP;
+  end if;      
+  DBMS_OUTPUT.put_line('Dodano wszystkie miejsca dla sektora.');
 END;
 /
 
@@ -162,5 +195,7 @@ END;
 SELECT * FROM typy_sektorow;
 SELECT * FROM STADIONY ORDER BY ID_STADIONU;
 SELECT * FROM SEKTORY ORDER BY ID_STADIONU;
+SELECT COUNT(*) FROM STADIONY;
+    SELECT COUNT(*) FROM MIEJSCA WHERE id_sektora=6;
 SELECT * FROM IMPREZY ORDER BY ID_STADIONU;
 
