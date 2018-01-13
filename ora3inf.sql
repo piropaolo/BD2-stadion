@@ -55,8 +55,22 @@ AFTER INSERT ON STADIONY
 FOR EACH ROW
 BEGIN
   FOR i IN 1..12 LOOP
+  
+        if i<=4 then
 		INSERT INTO SEKTORY(id_sektora ,id_typu, id_stadionu)
-        VALUES (i, round(dbms_random.value(1,3)), :NEW.id_stadionu);
+        VALUES (i, 1, :NEW.id_stadionu);
+        end if;
+        
+        if (i>4 and i<=8) then
+        INSERT INTO SEKTORY(id_sektora ,id_typu, id_stadionu)
+        VALUES (i, 2, :NEW.id_stadionu);
+        end if;
+        
+        if (i>8 and i<=12) then
+        INSERT INTO SEKTORY(id_sektora ,id_typu, id_stadionu)
+        VALUES (i, 3, :NEW.id_stadionu);
+        end if;
+        
   END LOOP;
   DBMS_OUTPUT.put_line('Dodano wszystkie sektory.');
 END;
