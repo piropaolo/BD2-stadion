@@ -6,8 +6,10 @@ DELETE FROM STADIONY;
 DELETE FROM IMPREZY;
 DELETE FROM TYPY_SEKTOROW;
 DELETE FROM TYPY_IMPREZ;
-DELETE FROM TYPY_KLIENTOW;
+DELETE FROM typy_klientow;
 DELETE FROM CENA;
+DELETE FROM PROMOCJE;
+DELETE FROM TYPY_KARNETOW;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
@@ -18,7 +20,6 @@ drop sequence dept_seq5;
 DROP trigger create_sek_aft_ins_stadiony;
 DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
-DROP trigger INCREMENT_typy_sektorow_ID;
 DROP trigger create_msc_aft_ins_sektor;
 drop trigger create_ceny_aft_ins_imprezy;
 
@@ -27,6 +28,8 @@ DROP procedure wstaw_do_stadiony;
 DROP procedure wstaw_do_typy_imprez;
 DROP procedure wstaw_do_imprezy;
 DROP procedure wstaw_do_typy_klientow;
+DROP procedure wstaw_do_promocje;
+DROP PROCEDURE wstaw_do_typy_karnetow;
 
 /*SEKWENCJE*/
 CREATE SEQUENCE dept_seq START WITH 1;
@@ -167,9 +170,9 @@ create or replace PROCEDURE wstaw_do_typy_klientow
 IS
 BEGIN
     INSERT INTO typy_klientow VALUES (1, 'Normalny',0,'Nie przysluguje znizka');
-    INSERT INTO typy_klientow VALUES (2, 'Dziecko',50,'50% zniżki: Dziecko do lat 12');
-    INSERT INTO typy_klientow VALUES (3, 'Emeryt',70,'70% zniżki: Po osiegnieciu wieku emerytalnego: 60 lat dla kobiet, 65 lat dla mężczyzn');
-    INSERT INTO typy_klientow VALUES (4, 'Kompatant',95,'90% zniżki: Dla kompatantow wojennych');
+    INSERT INTO typy_klientow VALUES (2, 'Dziecko',50,'Dziecko do lat 12');
+    INSERT INTO typy_klientow VALUES (3, 'Emeryt',70,'Po osiegnieciu wieku emerytalnego: 60 lat dla kobiet, 65 lat dla mężczyzn');
+    INSERT INTO typy_klientow VALUES (4, 'Kombatant',95,'kombatant wojennych');
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy klientów.');
 END;
 /
@@ -204,6 +207,38 @@ BEGIN
 END;
 /
 
+create or replace PROCEDURE wstaw_do_typy_karnetow
+IS
+BEGIN
+	
+    INSERT INTO typy_karnetow VALUES (1, 'Karnet Ligi Diamentowej Premium', 4000, DATE'2017-12-12', 'brak opisu', 1, 2);
+    INSERT INTO typy_karnetow VALUES (2, 'Karnet Ligi Diamentowej Normal', 3000, DATE'2017-12-12', 'brak opisu', 2, 2);
+    INSERT INTO typy_karnetow VALUES (3, 'Karnet Ligi Diamentowej Cheap', 2000, DATE'2017-12-12', 'brak opisu', 3, 2);
+    INSERT INTO typy_karnetow VALUES (4, 'Karnet Klubu Kabaretowego Premium', 200, DATE'2017-12-12', 'brak opisu', 1, 3);
+    INSERT INTO typy_karnetow VALUES (5, 'Karnet Klubu Kabaretowego Normal', 150, DATE'2017-12-12', 'brak opisu', 2, 3);
+    INSERT INTO typy_karnetow VALUES (6, 'Karnet Klubu Kabaretowego Cheap', 100, DATE'2017-12-12', 'brak opisu', 3, 3);
+    INSERT INTO typy_karnetow VALUES (7, 'Karnet Sezonu Piłkarskiego Premium',600, DATE'2017-12-12', 'brak opisu', 1, 2);
+    INSERT INTO typy_karnetow VALUES (8, 'Karnet Sezonu Piłkarskiego Normal',400, DATE'2017-12-12', 'brak opisu', 2, 2);
+    INSERT INTO typy_karnetow VALUES (9, 'Karnet Sezonu Piłkarskiego Cheap',200, DATE'2017-12-12', 'brak opisu', 3, 2);
+    INSERT INTO typy_karnetow VALUES (10, 'Karnet Koncertowy Premium',1000, DATE'2017-12-12', 'brak opisu', 1, 1);
+    INSERT INTO typy_karnetow VALUES (11, 'Karnet Koncertowy Normal',800, DATE'2017-12-12', 'brak opisu', 2, 1);
+    INSERT INTO typy_karnetow VALUES (12, 'Karnet Koncertowy Cheap',600, DATE'2017-12-12', 'brak opisu', 3, 1);
+	
+	DBMS_OUTPUT.put_line('Dodano wszystkie typy karnetów.');
+END;
+/
+
+create or replace PROCEDURE wstaw_do_promocje
+IS
+BEGIN
+    INSERT INTO promocje VALUES (1, 'Brak',0,'Nie przysluguje znizka',1);
+    INSERT INTO promocje VALUES (2, 'Zniżka dziecięca',50,'50% zniżki od ceny oryginalnej',2);
+    INSERT INTO promocje VALUES (3, 'Zniżka dla emeryta',70,'70% zniżki od ceny oryginalnej',3);
+    INSERT INTO promocje VALUES (4, 'Zniżka dla kombatanta',95,'90% zniżki od ceny oryginalnej',4);
+	DBMS_OUTPUT.put_line('Dodano wszystkie promocje.');
+END;
+/
+
 create or replace PROCEDURE wstaw_do_imprezy
 is
   TYPE TABSTR IS TABLE OF VARCHAR2(250);
@@ -234,16 +269,3 @@ BEGIN
   DBMS_OUTPUT.put_line('Dodano wszystkie imprezy.');
 END;
 /
-
-
-
-/* WYWOŁANIA */
-/*KOLEJNOSC WYWOŁYWANIA PROCEDUR
-    1.WSTAW DO TYPY SEKTORÓW
-    2.WSTAW DO TYPY IMPREZ
-    4.WSTAW DO TYPY KLIENTÓW
-    5.WSTAW DO STADIONY
-    6.WSTAW DO IMPREZY
-*/
-
-
