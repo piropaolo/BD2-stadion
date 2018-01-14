@@ -10,6 +10,7 @@ DELETE FROM typy_klientow;
 DELETE FROM CENA;
 DELETE FROM PROMOCJE;
 DELETE FROM TYPY_KARNETOW;
+DELETE FROM KLIENCI;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
@@ -30,6 +31,7 @@ DROP procedure wstaw_do_imprezy;
 DROP procedure wstaw_do_typy_klientow;
 DROP procedure wstaw_do_promocje;
 DROP PROCEDURE wstaw_do_typy_karnetow;
+DROP PROCEDURE wstaw_do_klienci;
 
 /*SEKWENCJE*/
 CREATE SEQUENCE dept_seq START WITH 1;
@@ -58,6 +60,7 @@ BEGIN
   FROM   dual;
 END;
 /
+
 
 create or replace TRIGGER create_sek_aft_ins_stadiony
 AFTER INSERT ON STADIONY
@@ -171,7 +174,7 @@ IS
 BEGIN
     INSERT INTO typy_klientow VALUES (1, 'Normalny',0,'Nie przysluguje znizka');
     INSERT INTO typy_klientow VALUES (2, 'Dziecko',50,'Dziecko do lat 12');
-    INSERT INTO typy_klientow VALUES (3, 'Emeryt',70,'Po osiegnieciu wieku emerytalnego: 60 lat dla kobiet, 65 lat dla mężczyzn');
+    INSERT INTO typy_klientow VALUES (3, 'Emeryt',70,'Po osiegnieciu wieku emerytalnego: 65 lat');
     INSERT INTO typy_klientow VALUES (4, 'Kombatant',95,'kombatant wojennych');
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy klientów.');
 END;
@@ -269,3 +272,113 @@ BEGIN
   DBMS_OUTPUT.put_line('Dodano wszystkie imprezy.');
 END;
 /
+
+create or replace PROCEDURE wstaw_do_klienci
+IS
+	TYPE TABSTR IS TABLE OF VARCHAR2(500);
+	imie TABSTR;
+    TYPE TABSTR2 IS TABLE OF VARCHAR2(500);
+	nazwisko TABSTR2;
+  
+	tel_number NUMBER(9);
+    kierunkowy NUMBER(3);
+    qname NUMBER(5);
+    qsurname NUMBER(5);
+    imie_w STRING (20);
+    nazw_w STRING (20);
+    rok_pesel NUMBER(2);
+    miesiac_pesel NUMBER(2);
+    dzien_pesel NUMBER(2);
+    reszta_pesel NUMBER(5);
+    got_pesel VARCHAR(11);
+    got_telefon VARCHAR(16);
+    typ_klienta NUMBER;
+    
+    
+BEGIN
+	imie := TABSTR ('Jan','Stanislaw','Andrzej','Jozef','Tadeusz','Jerzy','Zbigniew','Krzysztof','Henryk',
+    'Ryszard','Marek','Kazimierz','Marian','Piotr','Janusz','Wladyslaw','Adam','Wieslaw','Zdzislaw','Edward',
+    'Mieczyslaw','Roman','Miroslaw','Grzegorz','Czeslaw','Dariusz','Wojciech','Jacek','Eugeniusz','Maria','Tomasz',
+    'Krystyna','Anna','Barbara','Teresa','Elzbieta','Janina','Zofia','Jadwiga','Danuta','Halina','Irena','Ewa',
+    'Malgorzata','Helena','Grazyna','Bozena','Stanislawa','Marianna','Jolanta','Urszula','Wanda','Alicja','Dorota',
+    'Agnieszka','Beata','Katarzyna','Joanna','Wieslawa','Renata');
+    qname := imie.count;
+  
+    nazwisko := TABSTR2 ('Nowak','Kowalski','Wisniewski','Dabrowski','Lewandowski','Wojcik','Kaminski','Kowalczyk',
+    'Zielinski','Szymanski','Kozlowski','Wozniak','Jankowski','Wojciechowski','Kwiatkowski','Kaczmarek','Mazur',
+    'Krawczyk','Piotrowski','Grabowski','Nowakowski','Pawlowski','Michalski','Nowicki','Adamczyk','Dudek','Zajac',
+    'Wieczorek','Jablonski','Majewski','Krol','Olszewski','Jaworski','Wróbel','Malinowski','Pawlak','Witkowski',
+    'Walczak','Stepien','Gorski','Rutkowski','Michalak','Sikora','Ostrowski','Baran','Duda','Szewczyk','Tomaszewski',
+    'Marciniak','Pietrzak','Wroblewski','Zalewski','Jakubowski','Jasinski','Zawadzki','Sadowski','Bak','Chmielewski',
+    'Wlodarczyk','Borkowski','Czarnecki','Sawicki','Sokolowski','Urbanski','Kubiak','Maciejewski','Szczepanski'
+    ,'Wilk','Kucharski','Kalinowski','Lis','Mazurek','Wysocki','Adamski','Kazimierczak','Wasilewski','Sobczak',
+    'Czerwinski','Andrzejewski','Cieslak','Glowacki','Zakrzewski','Kolodziej','Sikorski','Krajewski','Gajewski',
+    'Szulc','Szymczak','Baranowski','Laskowski','Brzezinski','Makowski','Ziolkowski','Przybylski','Domanski',
+    'Nowacki','Borowski','Blaszczyk','Chojnacki','Ciesielski','Mroz','Szczepaniak','Wesolowski','Garecki','Krupa',
+    'Kaczmarczyk','Leszczynski','Lipinski');
+	qsurname := nazwisko.count;
+  
+
+	FOR i IN 1..5000 LOOP
+		tel_number := round(dbms_random.value(600000000,899999999));
+        kierunkowy := round(dbms_random.value(1,999));
+        rok_pesel := round(dbms_random.value(0,99));
+        miesiac_pesel := round(dbms_random.value(1,12));
+        dzien_pesel := round(dbms_random.value(1,28));
+        reszta_pesel := round(dbms_random.value(10000,99999));
+		imie_w := imie(round(dbms_random.value(1,qname)));
+        nazw_w := nazwisko(round(dbms_random.value(1,qsurname)));
+        
+        
+            got_pesel := to_char(rok_pesel);
+        if rok_pesel<10 then
+            got_pesel  := concat('0',to_char(rok_pesel));
+        end if;
+        
+        
+        if miesiac_pesel<10 then
+            got_pesel  := concat(got_pesel,concat('0',to_char(miesiac_pesel)));
+        else
+            got_pesel := concat(got_pesel,to_char(miesiac_pesel));
+        end if;
+        
+        
+        if dzien_pesel<10 then
+            got_pesel  := concat(got_pesel,concat('0',to_char(dzien_pesel)));
+        else
+            got_pesel := concat(got_pesel,to_char(dzien_pesel));
+        end if;
+        
+        got_pesel := concat(got_pesel, to_char(reszta_pesel));
+        got_telefon := concat(concat('+',concat(to_char(kierunkowy),' ')),to_char(tel_number));
+        
+        if rok_pesel<18 and rok_pesel>6 then
+            typ_klienta := 2;
+        elsif rok_pesel<53 and rok_pesel>30 then
+            typ_klienta := 3;
+        else
+            typ_klienta := 1;
+        end if;
+        
+        INSERT INTO KLIENCI
+        (id_klienta, 
+        nazwisko, 
+        imie,
+        PESEL,
+        zdjecie,
+        telefon_kontaktowy,
+        TYPY_KLIENTOW_ID_TYPU)
+        
+        VALUES 
+        (i, 
+        nazw_w, 
+        imie_w,
+        got_pesel,
+        EMPTY_BLOB(),
+        got_telefon,
+        typ_klienta);
+	END LOOP;
+  DBMS_OUTPUT.put_line('All klienci added.');
+END;
+/
+
