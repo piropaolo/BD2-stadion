@@ -10,6 +10,7 @@ DELETE FROM typy_klientow;
 DELETE FROM CENA;
 DELETE FROM PROMOCJE;
 DELETE FROM TYPY_KARNETOW;
+DELETE FROM REZERWACJE;
 DELETE FROM KLIENCI;
 
 drop sequence dept_seq;
@@ -23,6 +24,7 @@ DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
 DROP trigger create_msc_aft_ins_sektor;
 drop trigger create_ceny_aft_ins_imprezy;
+DROP TRIGGER create_rez_aft_ins_klienci;
 
 DROP procedure wstaw_do_typy_sektorow;
 DROP procedure wstaw_do_stadiony;
@@ -61,6 +63,38 @@ BEGIN
 END;
 /
 
+create or replace TRIGGER INCREMENT_rezerwacje_ID
+BEFORE INSERT ON rezerwacje
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq3.NEXTVAL
+  INTO   :new.id_rezerwacji
+  FROM   dual;
+END;
+/
+
+create or replace trigger create_rez_aft_ins_klienci
+after insert on klienci
+for each row
+DECLARE
+rand_date DATE;
+end_date DATE;
+do_rez NUMBER;
+begin
+
+    FOR i IN 1..1 LOOP
+        
+        do_rez := DBMS_RANDOM.value(0,10);
+        if do_rez > 8 then
+        rand_date := TO_DATE(TRUNC(DBMS_RANDOM.value(TO_CHAR(date '2013-01-01','J'),TO_CHAR(DATE '2016-12-31','J'))),'J');
+        end_date := add_months(rand_date,1);
+		INSERT INTO REZERWACJE VALUES (i, rand_date, end_date, :NEW.id_klienta);
+        end if;
+        
+    end loop;
+    
+end;
+/
 
 create or replace TRIGGER create_sek_aft_ins_stadiony
 AFTER INSERT ON STADIONY
