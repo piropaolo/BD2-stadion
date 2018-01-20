@@ -206,22 +206,13 @@ numer_rzedu NUMBER;
 numer_miejsca NUMBER;
 verification NUMBER;
 BEGIN
-    SELECT ID_stadionu, Id_imprezy INTO stad_id, imp_id FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA DESC NULLS LAST;
+    SELECT ID_stadionu, Id_imprezy INTO stad_id, imp_id FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA ASC NULLS LAST;
     numer_sektora := round(dbms_random.value(1,12));
-    verification := NULL;
+    verification := 0;
 
     if (numer_sektora <=4) then
-        numer_rzedu := round(dbms_random.value(1,50));
-        numer_miejsca := round(dbms_random.value(1,100));
         
-        BEGIN
-        SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
-        EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-        verification := NULL;
-        END;
-        
-        WHILE verification != NULL
+        WHILE verification IS NOT NULL
         LOOP
             verification := NULL;
             numer_rzedu := round(dbms_random.value(1,50));
@@ -237,16 +228,8 @@ BEGIN
     end if;
     
     if (numer_sektora > 4 and numer_sektora <= 8) then
-        numer_rzedu := round(dbms_random.value(1,100));
-        numer_miejsca := round(dbms_random.value(1,100));
-        BEGIN
-        SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
-        EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-        verification := NULL;
-        END;
-        
-        WHILE verification != NULL
+       
+        WHILE verification IS NOT NULL
         LOOP
             verification := NULL;
             numer_rzedu := round(dbms_random.value(1,100));
@@ -262,16 +245,8 @@ BEGIN
     end if;
     
     if (numer_sektora > 8 and numer_sektora <=12 ) then
-        numer_rzedu := round(dbms_random.value(1,50));
-        numer_miejsca := round(dbms_random.value(1,100));
-        BEGIN
-        SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
-        EXCEPTION
-        WHEN NO_DATA_FOUND THEN
-        verification := NULL;
-        END;
         
-        WHILE verification != NULL
+        WHILE verification IS NOT NULL
         LOOP
             verification := NULL;
             numer_rzedu := round(dbms_random.value(1,50));
