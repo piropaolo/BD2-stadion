@@ -11,8 +11,8 @@ DELETE FROM CENA;
 DELETE FROM PROMOCJE;
 DELETE FROM TYPY_KARNETOW;
 DELETE FROM REZERWACJE;
-DELETE FROM KLIENCI;
 DELETE FROM BILETY;
+DELETE FROM KLIENCI;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
@@ -75,6 +75,16 @@ BEGIN
 END;
 /
 
+create or replace TRIGGER INCREMENT_klienci_ID
+BEFORE INSERT ON klienci
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq4.NEXTVAL
+  INTO   :new.id_klienta
+  FROM   dual;
+END;
+/
+
 create or replace trigger create_rez_aft_ins_klienci
 after insert on klienci
 for each row
@@ -118,7 +128,6 @@ BEGIN
         VALUES (i, 3, :NEW.id_stadionu);
         end if;
   END LOOP;
-  COMMIT;
   DBMS_OUTPUT.put_line('Dodano wszystkie sektory.');
 END;
 /
@@ -203,25 +212,88 @@ imp_id NUMBER;
 numer_sektora NUMBER;
 numer_rzedu NUMBER;
 numer_miejsca NUMBER;
+verification NUMBER;
 BEGIN
     SELECT ID_stadionu, Id_imprezy INTO stad_id, imp_id FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA DESC NULLS LAST;
     numer_sektora := round(dbms_random.value(1,12));
+    verification := NULL;
 
     if (numer_sektora <=4) then
         numer_rzedu := round(dbms_random.value(1,50));
         numer_miejsca := round(dbms_random.value(1,100));
+        
+        BEGIN
+        SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+        verification := NULL;
+        END;
+        
+        WHILE verification != NULL
+        LOOP
+            verification := NULL;
+            numer_rzedu := round(dbms_random.value(1,50));
+            numer_miejsca := round(dbms_random.value(1,100));
+            BEGIN
+                SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                verification := NULL;
+            END;
+        END LOOP;
 		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
     end if;
+    
     if (numer_sektora > 4 and numer_sektora <= 8) then
         numer_rzedu := round(dbms_random.value(1,100));
         numer_miejsca := round(dbms_random.value(1,100));
+        BEGIN
+        SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+        verification := NULL;
+        END;
+        
+        WHILE verification != NULL
+        LOOP
+            verification := NULL;
+            numer_rzedu := round(dbms_random.value(1,100));
+            numer_miejsca := round(dbms_random.value(1,100));
+            BEGIN
+                SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                verification := NULL;
+            END;
+        END LOOP;
 		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
     end if;
+    
     if (numer_sektora > 8 and numer_sektora <=12 ) then
         numer_rzedu := round(dbms_random.value(1,50));
         numer_miejsca := round(dbms_random.value(1,100));
+        BEGIN
+        SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+        EXCEPTION
+        WHEN NO_DATA_FOUND THEN
+        verification := NULL;
+        END;
+        
+        WHILE verification != NULL
+        LOOP
+            verification := NULL;
+            numer_rzedu := round(dbms_random.value(1,50));
+            numer_miejsca := round(dbms_random.value(1,100));
+            BEGIN
+                SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                verification := NULL;
+            END;
+        END LOOP;
 		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
     end if;
+    
   DBMS_OUTPUT.put_line('Dodano bilet.');
 END;
 /
@@ -394,7 +466,7 @@ BEGIN
 	qsurname := nazwisko.count;
   
 
-	FOR i IN 1..5000 LOOP
+	FOR i IN 1..100 LOOP
 		tel_number := round(dbms_random.value(600000000,899999999));
         kierunkowy := round(dbms_random.value(1,999));
         rok_pesel := round(dbms_random.value(0,99));
@@ -452,8 +524,9 @@ BEGIN
         EMPTY_BLOB(),
         got_telefon,
         typ_klienta);
+        
+        COMMIT;
 	END LOOP;
-COMMIT;
   DBMS_OUTPUT.put_line('All klienci added.');
 END;
 /

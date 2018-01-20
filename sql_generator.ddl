@@ -60,7 +60,7 @@ CREATE TABLE klienci (
     id_klienta              NUMBER NOT NULL,
     nazwisko                VARCHAR2(30 CHAR) NOT NULL,
     imie                    VARCHAR2(30 CHAR) NOT NULL,
-    pesel                   NUMBER,
+    pesel                   VARCHAR2(11 CHAR),
     zdjecie                 BLOB NOT NULL,
     telefon_kontaktowy      VARCHAR2(16 CHAR),
     typy_klientow_id_typu   NUMBER NOT NULL
@@ -111,14 +111,14 @@ id_sektora );
 
 CREATE TABLE stadiony (
     id_stadionu     NUMBER NOT NULL,
-    nazwa_obiektu   VARCHAR2(30 CHAR) NOT NULL
+    nazwa_obiektu   VARCHAR2(150 CHAR) NOT NULL
 );
 
 ALTER TABLE stadiony ADD CONSTRAINT stadiony_pk PRIMARY KEY ( id_stadionu );
 
 CREATE TABLE typy_imprez (
     id_typu   NUMBER NOT NULL,
-    nazwa     VARCHAR2(30 CHAR) NOT NULL,
+    nazwa     VARCHAR2(150 CHAR) NOT NULL,
     opis      VARCHAR2(150 CHAR)
 );
 
@@ -126,7 +126,7 @@ ALTER TABLE typy_imprez ADD CONSTRAINT typy_imprez_pk PRIMARY KEY ( id_typu );
 
 CREATE TABLE typy_karnetow (
     id_typu_karnetu         NUMBER NOT NULL,
-    nazwa                   VARCHAR2(30 CHAR) NOT NULL,
+    nazwa                   VARCHAR2(50 CHAR) NOT NULL,
     cena                    NUMBER(20,2) NOT NULL,
     okres_waznosci          DATE NOT NULL,
     opis                    VARCHAR2(150 CHAR),
