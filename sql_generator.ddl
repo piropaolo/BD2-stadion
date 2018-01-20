@@ -126,7 +126,7 @@ ALTER TABLE typy_imprez ADD CONSTRAINT typy_imprez_pk PRIMARY KEY ( id_typu );
 
 CREATE TABLE typy_karnetow (
     id_typu_karnetu         NUMBER NOT NULL,
-    nazwa                   VARCHAR2(30 CHAR) NOT NULL,
+    nazwa                   VARCHAR2(50 CHAR) NOT NULL,
     cena                    NUMBER(20,2) NOT NULL,
     okres_waznosci          DATE NOT NULL,
     opis                    VARCHAR2(150 CHAR),
