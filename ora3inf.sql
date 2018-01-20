@@ -12,6 +12,7 @@ DELETE FROM PROMOCJE;
 DELETE FROM TYPY_KARNETOW;
 DELETE FROM REZERWACJE;
 DELETE FROM KLIENCI;
+DELETE FROM BILETY;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
@@ -23,8 +24,9 @@ DROP trigger create_sek_aft_ins_stadiony;
 DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
 DROP trigger create_msc_aft_ins_sektor;
-drop trigger create_ceny_aft_ins_imprezy;
-DROP TRIGGER create_rez_aft_ins_klienci;
+DROP trigger create_ceny_aft_ins_imprezy;
+DROP trigger create_rez_aft_ins_klienci;
+DROP trigger create_bilety_aft_ins_rez;
 
 DROP procedure wstaw_do_typy_sektorow;
 DROP procedure wstaw_do_stadiony;
@@ -32,8 +34,8 @@ DROP procedure wstaw_do_typy_imprez;
 DROP procedure wstaw_do_imprezy;
 DROP procedure wstaw_do_typy_klientow;
 DROP procedure wstaw_do_promocje;
-DROP PROCEDURE wstaw_do_typy_karnetow;
-DROP PROCEDURE wstaw_do_klienci;
+DROP procedure wstaw_do_typy_karnetow;
+DROP procedure wstaw_do_klienci;
 
 /*SEKWENCJE*/
 CREATE SEQUENCE dept_seq START WITH 1;
@@ -92,7 +94,6 @@ begin
         end if;
         
     end loop;
-    
 end;
 /
 
@@ -116,8 +117,8 @@ BEGIN
         INSERT INTO SEKTORY(id_sektora ,id_typu, id_stadionu)
         VALUES (i, 3, :NEW.id_stadionu);
         end if;
-        
   END LOOP;
+  COMMIT;
   DBMS_OUTPUT.put_line('Dodano wszystkie sektory.');
 END;
 /
@@ -132,6 +133,7 @@ BEGIN
             INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
         END LOOP;
     END LOOP;
+
   end if;
   
   if :new.id_typu = 2 then 
@@ -148,7 +150,7 @@ BEGIN
             INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
         END LOOP;
     END LOOP;
-  end if;      
+  end if;   
   DBMS_OUTPUT.put_line('Dodano wszystkie miejsca dla sektora.');
 END;
 /
@@ -191,6 +193,39 @@ BEGIN
 END;
 /
 
+
+create or replace TRIGGER create_bilety_aft_ins_rez
+AFTER INSERT ON rezerwacje
+FOR EACH ROW
+DECLARE
+stad_id NUMBER;
+imp_id NUMBER;
+numer_sektora NUMBER;
+numer_rzedu NUMBER;
+numer_miejsca NUMBER;
+BEGIN
+    SELECT ID_stadionu, Id_imprezy INTO stad_id, imp_id FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA DESC NULLS LAST;
+    numer_sektora := round(dbms_random.value(1,12));
+
+    if (numer_sektora <=4) then
+        numer_rzedu := round(dbms_random.value(1,50));
+        numer_miejsca := round(dbms_random.value(1,100));
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
+    end if;
+    if (numer_sektora > 4 and numer_sektora <= 8) then
+        numer_rzedu := round(dbms_random.value(1,100));
+        numer_miejsca := round(dbms_random.value(1,100));
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
+    end if;
+    if (numer_sektora > 8 and numer_sektora <=12 ) then
+        numer_rzedu := round(dbms_random.value(1,50));
+        numer_miejsca := round(dbms_random.value(1,100));
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
+    end if;
+  DBMS_OUTPUT.put_line('Dodano bilet.');
+END;
+/
+
 /*PROCEDURY*/
 create or replace PROCEDURE wstaw_do_typy_sektorow
 IS
@@ -200,6 +235,7 @@ BEGIN
     INSERT INTO typy_sektorow VALUES (3, 'TYP 3','test_opis3');
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy sektorów.');
+COMMIT;
 END;
 /
 
@@ -228,6 +264,7 @@ BEGIN
 	FOR i IN 1..2 LOOP
 		INSERT INTO stadiony VALUES (i, name(i));
 	END LOOP;
+	COMMIT;
 	DBMS_OUTPUT.put_line('Dodano wszystkie stadiony.');
 END;
 /
@@ -241,6 +278,7 @@ BEGIN
     INSERT INTO typy_imprez VALUES (3, 'Występ','test_opis3');
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy imprez.');
+COMMIT;
 END;
 /
 
@@ -262,6 +300,7 @@ BEGIN
     INSERT INTO typy_karnetow VALUES (12, 'Karnet Koncertowy Cheap',600, DATE'2017-12-12', 'brak opisu', 3, 1);
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy karnetów.');
+COMMIT;
 END;
 /
 
@@ -273,6 +312,7 @@ BEGIN
     INSERT INTO promocje VALUES (3, 'Zniżka dla emeryta',70,'70% zniżki od ceny oryginalnej',3);
     INSERT INTO promocje VALUES (4, 'Zniżka dla kombatanta',95,'90% zniżki od ceny oryginalnej',4);
 	DBMS_OUTPUT.put_line('Dodano wszystkie promocje.');
+COMMIT;
 END;
 /
 
@@ -303,6 +343,7 @@ BEGIN
         INSERT into imprezy values(j,nazwa(round(dbms_random.value(1,qnazwa))),add_months(dates(j),12*i),round(dbms_random.value(1,2)),round(dbms_random.value(1,3)),'test_opis');
     END LOOP;
   END LOOP;
+	COMMIT;
   DBMS_OUTPUT.put_line('Dodano wszystkie imprezy.');
 END;
 /
@@ -412,6 +453,7 @@ BEGIN
         got_telefon,
         typ_klienta);
 	END LOOP;
+COMMIT;
   DBMS_OUTPUT.put_line('All klienci added.');
 END;
 /
