@@ -94,7 +94,6 @@ begin
         end if;
         
     end loop;
-    
 end;
 /
 
@@ -118,8 +117,8 @@ BEGIN
         INSERT INTO SEKTORY(id_sektora ,id_typu, id_stadionu)
         VALUES (i, 3, :NEW.id_stadionu);
         end if;
-        
   END LOOP;
+  COMMIT;
   DBMS_OUTPUT.put_line('Dodano wszystkie sektory.');
 END;
 /
@@ -134,6 +133,7 @@ BEGIN
             INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
         END LOOP;
     END LOOP;
+
   end if;
   
   if :new.id_typu = 2 then 
@@ -150,7 +150,7 @@ BEGIN
             INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
         END LOOP;
     END LOOP;
-  end if;      
+  end if;   
   DBMS_OUTPUT.put_line('Dodano wszystkie miejsca dla sektora.');
 END;
 /
@@ -235,6 +235,7 @@ BEGIN
     INSERT INTO typy_sektorow VALUES (3, 'TYP 3','test_opis3');
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy sektorów.');
+COMMIT;
 END;
 /
 
@@ -263,6 +264,7 @@ BEGIN
 	FOR i IN 1..2 LOOP
 		INSERT INTO stadiony VALUES (i, name(i));
 	END LOOP;
+	COMMIT;
 	DBMS_OUTPUT.put_line('Dodano wszystkie stadiony.');
 END;
 /
@@ -276,6 +278,7 @@ BEGIN
     INSERT INTO typy_imprez VALUES (3, 'Występ','test_opis3');
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy imprez.');
+COMMIT;
 END;
 /
 
@@ -297,6 +300,7 @@ BEGIN
     INSERT INTO typy_karnetow VALUES (12, 'Karnet Koncertowy Cheap',600, DATE'2017-12-12', 'brak opisu', 3, 1);
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy karnetów.');
+COMMIT;
 END;
 /
 
@@ -308,6 +312,7 @@ BEGIN
     INSERT INTO promocje VALUES (3, 'Zniżka dla emeryta',70,'70% zniżki od ceny oryginalnej',3);
     INSERT INTO promocje VALUES (4, 'Zniżka dla kombatanta',95,'90% zniżki od ceny oryginalnej',4);
 	DBMS_OUTPUT.put_line('Dodano wszystkie promocje.');
+COMMIT;
 END;
 /
 
@@ -338,6 +343,7 @@ BEGIN
         INSERT into imprezy values(j,nazwa(round(dbms_random.value(1,qnazwa))),add_months(dates(j),12*i),round(dbms_random.value(1,2)),round(dbms_random.value(1,3)),'test_opis');
     END LOOP;
   END LOOP;
+	COMMIT;
   DBMS_OUTPUT.put_line('Dodano wszystkie imprezy.');
 END;
 /
@@ -447,6 +453,7 @@ BEGIN
         got_telefon,
         typ_klienta);
 	END LOOP;
+COMMIT;
   DBMS_OUTPUT.put_line('All klienci added.');
 END;
 /
