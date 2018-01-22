@@ -33,9 +33,31 @@ BEGIN
     WSTAW_DO_IMPREZY;
     WSTAW_DO_PROMOCJE;
     WSTAW_DO_TYPY_KARNETOW;
-    WSTAW_DO_KLIENCI;
 END;
 /*KONIEC GENERACJI DANYCH*/
+
+
+BEGIN
+WSTAW_DO_Klienci;
+END;
+
+
+DECLARE
+typ_klienta NUMBER;
+prom_id NUMBER;
+CURSOR zakupy_cur IS
+    Select id_klienta, promocja_id_promocji 
+    from zakupy for update;
+BEGIN
+
+  FOR zakup IN zakupy_cur 
+  LOOP
+    SELECT typy_klientow_id_typu into typ_klienta from klienci where id_klienta = zakup.id_klienta;
+    SELECT id_promocji into prom_id from promocje where typy_klientow_id_typu = typ_klienta;
+    update zakupy set promocja_id_promocji = prom_id where current of zakupy_cur;
+  END LOOP;
+END;
+/
 
 /*TEST WYGENEROWANYCH DANYCH*/
 SELECT * FROM typy_sektorow;
@@ -51,13 +73,5 @@ SELECT Count(*) FROM Klienci ORDER BY PESEL;
 SELECT count(*) FROM REZERWACJE;
 SELECT * FROM REZERWACJE;
 SELECT * FROM bilety;
+SELECT * FROM zakupy;
 /*KONIEC TESTÓW WYGENEROWANYCH DANYCH*/
-
-BEGIN
-WSTAW_DO_Klienci;
-END;
-
-
-
-
-
