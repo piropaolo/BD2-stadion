@@ -13,6 +13,7 @@ DELETE FROM KLIENCI;
 DELETE FROM TYPY_SEKTOROW;
 DELETE FROM TYPY_IMPREZ;
 DELETE FROM typy_klientow;
+DELETE FROM zakupy;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
@@ -23,10 +24,12 @@ drop sequence dept_seq5;
 DROP trigger create_sek_aft_ins_stadiony;
 DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
+DROP trigger INCREMENT_zakupy_ID;
 DROP trigger create_msc_aft_ins_sektor;
 DROP trigger create_ceny_aft_ins_imprezy;
 DROP trigger create_rez_aft_ins_klienci;
 DROP trigger create_bilety_aft_ins_rez;
+DROP trigger create_zakup_aft_ins_rezerw;
 
 DROP procedure wstaw_do_typy_sektorow;
 DROP procedure wstaw_do_stadiony;
@@ -76,6 +79,17 @@ BEGIN
   FROM   dual;
 END;
 /
+
+create or replace TRIGGER INCREMENT_zakupy_ID
+BEFORE INSERT ON zakupy
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq5.NEXTVAL
+  INTO   :new.ID_ZAKUPU
+  FROM   dual;
+END;
+/
+
 
 create or replace trigger create_rez_aft_ins_klienci
 after insert on klienci
@@ -201,17 +215,20 @@ FOR EACH ROW
 DECLARE
 stad_id NUMBER;
 imp_id NUMBER;
+
+
+imp_data DATE;
 numer_sektora NUMBER;
 numer_rzedu NUMBER;
 numer_miejsca NUMBER;
 verification NUMBER;
 BEGIN
-    SELECT ID_stadionu, Id_imprezy INTO stad_id, imp_id FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA ASC NULLS LAST;
+    SELECT ID_stadionu, Id_imprezy, data INTO stad_id, imp_id, imp_data FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA ASC NULLS LAST;
     numer_sektora := round(dbms_random.value(1,12));
     verification := 0;
 
     if (numer_sektora <=4) then
-        
+
         WHILE verification IS NOT NULL
         LOOP
             verification := NULL;
@@ -226,9 +243,9 @@ BEGIN
         END LOOP;
 		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
     end if;
-    
+
     if (numer_sektora > 4 and numer_sektora <= 8) then
-       
+
         WHILE verification IS NOT NULL
         LOOP
             verification := NULL;
@@ -243,9 +260,9 @@ BEGIN
         END LOOP;
 		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
     end if;
-    
+
     if (numer_sektora > 8 and numer_sektora <=12 ) then
-        
+
         WHILE verification IS NOT NULL
         LOOP
             verification := NULL;
@@ -260,10 +277,29 @@ BEGIN
         END LOOP;
 		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
     end if;
-    
+
   DBMS_OUTPUT.put_line('Dodano bilet.');
 END;
 /
+
+create or replace trigger create_zakup_aft_ins_rezerw
+after insert on rezerwacje
+for each row
+DECLARE
+days_diff NUMBER;
+imp_data DATE;
+id_typu_klienta NUMBER;
+id_prom NUMBER;
+begin
+    SELECT data INTO imp_data FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA ASC NULLS LAST;
+        
+    days_diff := imp_data - :new.data;
+    days_diff := round(days_diff/2);
+    INSERT INTO zakupy (data,id_klienta) VALUES(:new.data + days_diff,:new.id_klienta);
+    
+end;
+/
+
 
 /*PROCEDURY*/
 create or replace PROCEDURE wstaw_do_typy_sektorow
@@ -497,4 +533,6 @@ BEGIN
   DBMS_OUTPUT.put_line('All klienci added.');
 END;
 /
+
+
 
