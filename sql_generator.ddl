@@ -47,7 +47,7 @@ CREATE TABLE karnety (
     id_karnetu              NUMBER(20,2) NOT NULL,
     data_wystawienia        DATE NOT NULL,
     data_waznosci           DATE NOT NULL,
-    cena                    NUMBER(2) NOT NULL,
+    cena                    NUMBER(20,2) NOT NULL,
     klienci_id_klienta      NUMBER NOT NULL,
     id_typu_klienta         NUMBER NOT NULL,
     typy_karnetow_id_typu   NUMBER NOT NULL,
