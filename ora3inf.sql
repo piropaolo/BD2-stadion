@@ -14,22 +14,26 @@ DELETE FROM TYPY_SEKTOROW;
 DELETE FROM TYPY_IMPREZ;
 DELETE FROM typy_klientow;
 DELETE FROM zakupy;
+DELETE FROM karnety;
+
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
 drop sequence dept_seq3;
 drop sequence dept_seq4;
 drop sequence dept_seq5;
+drop sequence dept_seq6;
 
 DROP trigger create_sek_aft_ins_stadiony;
 DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
 DROP trigger INCREMENT_zakupy_ID;
+DROP trigger INCREMENT_karnety_ID;
 DROP trigger create_msc_aft_ins_sektor;
 DROP trigger create_ceny_aft_ins_imprezy;
 DROP trigger create_rez_aft_ins_klienci;
-DROP trigger create_bilety_aft_ins_rez;
-DROP trigger create_zakup_aft_ins_rezerw;
+DROP trigger bilet_and_zakup_aft_ins_rez;
+DROP trigger karnety_aft_klienci;
 
 DROP procedure wstaw_do_typy_sektorow;
 DROP procedure wstaw_do_stadiony;
@@ -46,7 +50,7 @@ CREATE SEQUENCE dept_seq2 START WITH 1;
 CREATE SEQUENCE dept_seq3 START WITH 1;
 CREATE SEQUENCE dept_seq4 START WITH 1;
 CREATE SEQUENCE dept_seq5 START WITH 1;
-
+CREATE SEQUENCE dept_seq6 START WITH 1;
 /*TRIGGERY*/
 
 
@@ -90,6 +94,15 @@ BEGIN
 END;
 /
 
+create or replace TRIGGER INCREMENT_karnety_ID
+BEFORE INSERT ON karnety
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq6.NEXTVAL
+  INTO   :new.ID_karnetu
+  FROM   dual;
+END;
+/
 
 create or replace trigger create_rez_aft_ins_klienci
 after insert on klienci
@@ -103,7 +116,7 @@ begin
     FOR i IN 1..1 LOOP
         
         do_rez := DBMS_RANDOM.value(0,10);
-        if do_rez > 8 then
+        if do_rez > 6 then
         rand_date := TO_DATE(TRUNC(DBMS_RANDOM.value(TO_CHAR(date '2013-01-01','J'),TO_CHAR(DATE '2016-12-31','J'))),'J');
         end_date := add_months(rand_date,1);
 		INSERT INTO REZERWACJE VALUES (i, rand_date, end_date, :NEW.id_klienta);
@@ -208,22 +221,66 @@ BEGIN
 END;
 /
 
+create or replace TRIGGER karnety_aft_klienci
+AFTER INSERT ON klienci
+for each row
+declare
+kup_karnet NUMBER;
+rand_date DATE;
+end_date DATE;
+jaki_karnet NUMBER;
+cena_wej NUMBER;
+cena_wyj NUMBER(20,2);
+rabat_wej NUMBER;
+id_promo NUMBER;
+begin
+    kup_karnet := round(dbms_random.value(1,10));
+    jaki_karnet := round(dbms_random.value(1,12));
+    
+    if kup_karnet > 7 then
+    rand_date := TO_DATE(TRUNC(DBMS_RANDOM.value(TO_CHAR(date '2013-01-01','J'),TO_CHAR(DATE '2016-12-31','J'))),'J');
+    end_date := add_months(rand_date,6);
+    
+    SELECT cena into cena_wej FROM typy_karnetow where id_typu_karnetu = jaki_karnet;
+    select rabat, id_promocji into rabat_wej, id_promo from promocje where typy_klientow_id_typu = :new.typy_klientow_id_typu;
+    if rabat_wej > 0 then
+    cena_wyj := round(cena_wej*(rabat_wej*0.01),2);
+    else 
+    cena_wyj := round(cena_wej,2);
+    end if;
+    
+    INSERT INTO karnety (data_wystawienia, data_waznosci, cena, klienci_id_klienta, id_typu_klienta, typy_karnetow_id_typu, id_promocji) 
+        values (rand_date, end_date, cena_wyj,:new.id_klienta, :new.typy_klientow_id_typu, jaki_karnet, id_promo);
+    end if;
+end;
+/
 
-create or replace TRIGGER create_bilety_aft_ins_rez
+create or replace TRIGGER bilet_and_zakup_aft_ins_rez
 AFTER INSERT ON rezerwacje
 FOR EACH ROW
 DECLARE
+days_diff NUMBER;
+id_typu_klienta NUMBER;
+id_prom NUMBER;
+new_id_zak NUMBER;
 stad_id NUMBER;
 imp_id NUMBER;
-
-
 imp_data DATE;
 numer_sektora NUMBER;
 numer_rzedu NUMBER;
 numer_miejsca NUMBER;
 verification NUMBER;
 BEGIN
+    /*zakupy*/
     SELECT ID_stadionu, Id_imprezy, data INTO stad_id, imp_id, imp_data FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA ASC NULLS LAST;
+    days_diff := imp_data - :new.data;
+    days_diff := round(days_diff/2);
+    INSERT INTO zakupy (data,id_klienta) VALUES(:new.data + days_diff,:new.id_klienta);
+    select id_zakupu into new_id_zak from zakupy where rowid=(select max(rowid) from zakupy);
+
+
+
+    /*bilety*/
     numer_sektora := round(dbms_random.value(1,12));
     verification := 0;
 
@@ -241,7 +298,7 @@ BEGIN
                 verification := NULL;
             END;
         END LOOP;
-		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,new_id_zak);
     end if;
 
     if (numer_sektora > 4 and numer_sektora <= 8) then
@@ -258,7 +315,7 @@ BEGIN
                 verification := NULL;
             END;
         END LOOP;
-		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,new_id_zak);
     end if;
 
     if (numer_sektora > 8 and numer_sektora <=12 ) then
@@ -275,29 +332,11 @@ BEGIN
                 verification := NULL;
             END;
         END LOOP;
-		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,null);
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,new_id_zak);
     end if;
 
-  DBMS_OUTPUT.put_line('Dodano bilet.');
+  DBMS_OUTPUT.put_line('Dodano bilet i zakup.');
 END;
-/
-
-create or replace trigger create_zakup_aft_ins_rezerw
-after insert on rezerwacje
-for each row
-DECLARE
-days_diff NUMBER;
-imp_data DATE;
-id_typu_klienta NUMBER;
-id_prom NUMBER;
-begin
-    SELECT data INTO imp_data FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA ASC NULLS LAST;
-        
-    days_diff := imp_data - :new.data;
-    days_diff := round(days_diff/2);
-    INSERT INTO zakupy (data,id_klienta) VALUES(:new.data + days_diff,:new.id_klienta);
-    
-end;
 /
 
 
@@ -469,7 +508,7 @@ BEGIN
 	qsurname := nazwisko.count;
   
 
-	FOR i IN 1..100 LOOP
+	FOR i IN 1..500 LOOP
 		tel_number := round(dbms_random.value(600000000,899999999));
         kierunkowy := round(dbms_random.value(1,999));
         rok_pesel := round(dbms_random.value(0,99));
@@ -533,6 +572,3 @@ BEGIN
   DBMS_OUTPUT.put_line('All klienci added.');
 END;
 /
-
-
-

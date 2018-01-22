@@ -12,18 +12,24 @@ DELETE FROM KLIENCI;
 DELETE FROM TYPY_SEKTOROW;
 DELETE FROM TYPY_IMPREZ;
 DELETE FROM typy_klientow;
+DELETE FROM karnety;
+
+
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
 drop sequence dept_seq3;
 drop sequence dept_seq4;
 drop sequence dept_seq5;
+drop sequence dept_seq6;
+
 
 CREATE SEQUENCE dept_seq START WITH 1;
 CREATE SEQUENCE dept_seq2 START WITH 1;
 CREATE SEQUENCE dept_seq3 START WITH 1;
 CREATE SEQUENCE dept_seq4 START WITH 1;
 CREATE SEQUENCE dept_seq5 START WITH 1;
+CREATE SEQUENCE dept_seq6 START WITH 1;
 
 BEGIN
     WSTAW_DO_TYPY_SEKTOROW;
@@ -33,14 +39,12 @@ BEGIN
     WSTAW_DO_IMPREZY;
     WSTAW_DO_PROMOCJE;
     WSTAW_DO_TYPY_KARNETOW;
+    WSTAW_DO_KLIENCI;
 END;
-/*KONIEC GENERACJI DANYCH*/
-
 
 BEGIN
 WSTAW_DO_Klienci;
 END;
-
 
 DECLARE
 typ_klienta NUMBER;
@@ -58,6 +62,7 @@ BEGIN
   END LOOP;
 END;
 /
+/*KONIEC GENERACJI DANYCH*/
 
 /*TEST WYGENEROWANYCH DANYCH*/
 SELECT * FROM typy_sektorow;
@@ -74,4 +79,5 @@ SELECT count(*) FROM REZERWACJE;
 SELECT * FROM REZERWACJE;
 SELECT * FROM bilety;
 SELECT * FROM zakupy;
+SELECT * FROM karnety;
 /*KONIEC TESTÓW WYGENEROWANYCH DANYCH*/
