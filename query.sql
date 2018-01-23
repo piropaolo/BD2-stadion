@@ -1,4 +1,6 @@
 /*WYGENERUJ NOWE DANE*/
+
+/*upewnic sie ze wszystko sie usunelo*/
 DELETE FROM MIEJSCA;
 DELETE FROM SEKTORY;
 DELETE FROM STADIONY;
@@ -14,15 +16,12 @@ DELETE FROM TYPY_IMPREZ;
 DELETE FROM typy_klientow;
 DELETE FROM karnety;
 
-
-
 drop sequence dept_seq;
 drop sequence dept_seq2;
 drop sequence dept_seq3;
 drop sequence dept_seq4;
 drop sequence dept_seq5;
 drop sequence dept_seq6;
-
 
 CREATE SEQUENCE dept_seq START WITH 1;
 CREATE SEQUENCE dept_seq2 START WITH 1;
@@ -31,6 +30,7 @@ CREATE SEQUENCE dept_seq4 START WITH 1;
 CREATE SEQUENCE dept_seq5 START WITH 1;
 CREATE SEQUENCE dept_seq6 START WITH 1;
 
+/*WSTAW DO WSZYSTKIEGO*/
 BEGIN
     WSTAW_DO_TYPY_SEKTOROW;
     WSTAW_DO_TYPY_IMPREZ;
@@ -42,10 +42,7 @@ BEGIN
     WSTAW_DO_KLIENCI;
 END;
 
-BEGIN
-WSTAW_DO_Klienci;
-END;
-
+/* Uzupełnienie promocja_id_promocji */
 DECLARE
 typ_klienta NUMBER;
 prom_id NUMBER;
@@ -67,6 +64,7 @@ END;
 /*TEST WYGENEROWANYCH DANYCH*/
 SELECT * FROM typy_sektorow;
 SELECT * FROM typy_klientow;
+SELECT * FROM TYPY_karnetow;
 SELECT * FROM IMPREZY ORDER BY Id_imprezy;
 SELECT * FROM STADIONY ORDER BY ID_STADIONU;
 SELECT * FROM SEKTORY ORDER BY ID_STADIONU;
