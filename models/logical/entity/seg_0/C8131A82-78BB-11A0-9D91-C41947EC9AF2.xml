@@ -84,7 +84,7 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_typu" id="61509081-DF7E-AD78-925B-655B5FA95ADD">
+<Attribute name="id_typu_imprezy" id="61509081-DF7E-AD78-925B-655B5FA95ADD">
 <createdBy>koraxiss</createdBy>
 <createdTime>2017-12-21 19:26:28 UTC</createdTime>
 <generatorID>A069EBEB-D12A-0763-A1D0-41B807C6D071</generatorID>

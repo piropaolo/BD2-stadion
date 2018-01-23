@@ -56,6 +56,21 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
+<Attribute name="id_promocji" id="BFC17901-3F0D-AF90-6719-37214472259B">
+<createdBy>koraxiss</createdBy>
+<createdTime>2018-01-10 11:49:04 UTC</createdTime>
+<generatorID>C049C660-5C67-3A58-7246-111974B5214F</generatorID>
+<ownerDesignName>models</ownerDesignName>
+<engineerTo>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>F80FAFE6-B980-FAD7-D971-F5D471A2BB99</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
 <identifier id="77D1E2E3-0F71-A173-58C1-7FF47D81B883" name="ZAKUP PK">
