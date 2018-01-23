@@ -128,7 +128,7 @@ CREATE TABLE typy_karnetow (
     id_typu_karnetu         NUMBER NOT NULL,
     nazwa                   VARCHAR2(50 CHAR) NOT NULL,
     cena                    NUMBER(20,2) NOT NULL,
-    okres_waznosci          DATE NOT NULL,
+    okres_waznosci          NUMBER NOT NULL,
     opis                    VARCHAR2(150 CHAR),
     typy_sektorow_id_typu   NUMBER NOT NULL,
     typy_imprez_id_typu     NUMBER NOT NULL

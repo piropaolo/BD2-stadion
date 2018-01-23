@@ -16,7 +16,6 @@ DELETE FROM typy_klientow;
 DELETE FROM zakupy;
 DELETE FROM karnety;
 
-
 drop sequence dept_seq;
 drop sequence dept_seq2;
 drop sequence dept_seq3;
@@ -230,6 +229,7 @@ rand_date DATE;
 end_date DATE;
 jaki_karnet NUMBER;
 cena_wej NUMBER;
+okres_wyj NUMBER;
 cena_wyj NUMBER(20,2);
 rabat_wej NUMBER;
 id_promo NUMBER;
@@ -239,9 +239,10 @@ begin
     
     if kup_karnet > 7 then
     rand_date := TO_DATE(TRUNC(DBMS_RANDOM.value(TO_CHAR(date '2013-01-01','J'),TO_CHAR(DATE '2016-12-31','J'))),'J');
-    end_date := add_months(rand_date,6);
     
-    SELECT cena into cena_wej FROM typy_karnetow where id_typu_karnetu = jaki_karnet;
+    
+    SELECT cena, okres_waznosci into cena_wej, okres_wyj FROM typy_karnetow where id_typu_karnetu = jaki_karnet;
+    end_date := add_months(rand_date,okres_wyj);
     select rabat, id_promocji into rabat_wej, id_promo from promocje where typy_klientow_id_typu = :new.typy_klientow_id_typu;
     if rabat_wej > 0 then
     cena_wyj := round(cena_wej*(rabat_wej*0.01),2);
@@ -375,7 +376,7 @@ BEGIN
 	'Expeditors International of Washington', 'Micron Technology', 'Bank of New York Mellon Corp.', 'Alcoa', 'Applied Materials', 'BB&T Corp.', 'Williams', 'Aflac', 'Procter & Gamble', 'Harris', 'Citigroup', 'CB Richard Ellis Group', 'New York Life Insurance', 'EMC', 'Gannett', 'PPL', 'Tech Data', 'Verizon Communications', 'Costco Wholesale', 'Jabil Circuit', 'Broadcom', 'Home Depot', 'Starwood Hotels & Resorts', 'Cisco Systems', 'Progress Energy', 'Northrop Grumman', 'Corning', 'Unum Group', 'AutoZone', 'Icahn Enterprises', 'Dell', 'Prudential Financial', 'Kimberly-Clark', 'Public Service Enterprise Group', 'Henry Schein', 'Arrow Electronics', 'Host Hotels & Resorts', 'General Mills', 'Ryder System', 'Kellogg', 'Ashland', 'PetSmart', 'CenterPoint Energy', 'SAIC', 'OfficeMax', 'Mohawk Industries', 'Masco', 'Wal-Mart Stores', 'Express Scripts', 'Stryker', 'Xcel Energy', 'BJ''s Wholesale Club', 
 	'FirstEnergy', 'Supervalu', 'Ball', 'Newmont Mining', 'Pitney Bowes', 'Eaton', 'Apollo Group', 'St. Jude Medical', 'Oneok', 'Nucor', 'Cameron International', 'Amgen', 'SPX', 'United Services Automobile Assn.', 'INTL FCStone', 'Regions Financial', 'Avaya', 'Southwest Airlines', 'State Farm Insurance Cos.', 'Omnicare', 'KeyCorp');
 	qname := name.count;
-	FOR i IN 1..2 LOOP
+	FOR i IN 1..2 LOOP /*liczba stadionow*/
 		INSERT INTO stadiony VALUES (i, name(i));
 	END LOOP;
 	COMMIT;
@@ -400,18 +401,18 @@ create or replace PROCEDURE wstaw_do_typy_karnetow
 IS
 BEGIN
 	
-    INSERT INTO typy_karnetow VALUES (1, 'Karnet Ligi Diamentowej Premium', 4000, DATE'2017-12-12', 'brak opisu', 1, 2);
-    INSERT INTO typy_karnetow VALUES (2, 'Karnet Ligi Diamentowej Normal', 3000, DATE'2017-12-12', 'brak opisu', 2, 2);
-    INSERT INTO typy_karnetow VALUES (3, 'Karnet Ligi Diamentowej Cheap', 2000, DATE'2017-12-12', 'brak opisu', 3, 2);
-    INSERT INTO typy_karnetow VALUES (4, 'Karnet Klubu Kabaretowego Premium', 200, DATE'2017-12-12', 'brak opisu', 1, 3);
-    INSERT INTO typy_karnetow VALUES (5, 'Karnet Klubu Kabaretowego Normal', 150, DATE'2017-12-12', 'brak opisu', 2, 3);
-    INSERT INTO typy_karnetow VALUES (6, 'Karnet Klubu Kabaretowego Cheap', 100, DATE'2017-12-12', 'brak opisu', 3, 3);
-    INSERT INTO typy_karnetow VALUES (7, 'Karnet Sezonu Piłkarskiego Premium',600, DATE'2017-12-12', 'brak opisu', 1, 2);
-    INSERT INTO typy_karnetow VALUES (8, 'Karnet Sezonu Piłkarskiego Normal',400, DATE'2017-12-12', 'brak opisu', 2, 2);
-    INSERT INTO typy_karnetow VALUES (9, 'Karnet Sezonu Piłkarskiego Cheap',200, DATE'2017-12-12', 'brak opisu', 3, 2);
-    INSERT INTO typy_karnetow VALUES (10, 'Karnet Koncertowy Premium',1000, DATE'2017-12-12', 'brak opisu', 1, 1);
-    INSERT INTO typy_karnetow VALUES (11, 'Karnet Koncertowy Normal',800, DATE'2017-12-12', 'brak opisu', 2, 1);
-    INSERT INTO typy_karnetow VALUES (12, 'Karnet Koncertowy Cheap',600, DATE'2017-12-12', 'brak opisu', 3, 1);
+    INSERT INTO typy_karnetow VALUES (1, 'Karnet Ligi Diamentowej Premium', 4000, 6, 'brak opisu', 1, 2);
+    INSERT INTO typy_karnetow VALUES (2, 'Karnet Ligi Diamentowej Normal', 3000, 6, 'brak opisu', 2, 2);
+    INSERT INTO typy_karnetow VALUES (3, 'Karnet Ligi Diamentowej Cheap', 2000, 6, 'brak opisu', 3, 2);
+    INSERT INTO typy_karnetow VALUES (4, 'Karnet Klubu Kabaretowego Premium', 200, 3, 'brak opisu', 1, 3);
+    INSERT INTO typy_karnetow VALUES (5, 'Karnet Klubu Kabaretowego Normal', 150, 3, 'brak opisu', 2, 3);
+    INSERT INTO typy_karnetow VALUES (6, 'Karnet Klubu Kabaretowego Cheap', 100, 3, 'brak opisu', 3, 3);
+    INSERT INTO typy_karnetow VALUES (7, 'Karnet Sezonu Piłkarskiego Premium',600, 9, 'brak opisu', 1, 2);
+    INSERT INTO typy_karnetow VALUES (8, 'Karnet Sezonu Piłkarskiego Normal',400, 9, 'brak opisu', 2, 2);
+    INSERT INTO typy_karnetow VALUES (9, 'Karnet Sezonu Piłkarskiego Cheap',200, 9, 'brak opisu', 3, 2);
+    INSERT INTO typy_karnetow VALUES (10, 'Karnet Koncertowy Premium',1000, 2, 'brak opisu', 1, 1);
+    INSERT INTO typy_karnetow VALUES (11, 'Karnet Koncertowy Normal',800, 2, 'brak opisu', 2, 1);
+    INSERT INTO typy_karnetow VALUES (12, 'Karnet Koncertowy Cheap',600, 2, 'brak opisu', 3, 1);
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy karnetów.');
 COMMIT;
@@ -508,7 +509,7 @@ BEGIN
 	qsurname := nazwisko.count;
   
 
-	FOR i IN 1..500 LOOP
+	FOR i IN 1..500 LOOP /*ilosc klientow */
 		tel_number := round(dbms_random.value(600000000,899999999));
         kierunkowy := round(dbms_random.value(1,999));
         rok_pesel := round(dbms_random.value(0,99));
