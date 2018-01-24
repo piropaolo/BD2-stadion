@@ -4,25 +4,35 @@ DELETE FROM MIEJSCA;
 DELETE FROM SEKTORY;
 DELETE FROM STADIONY;
 DELETE FROM IMPREZY;
-DELETE FROM TYPY_SEKTOROW;
-DELETE FROM TYPY_IMPREZ;
-DELETE FROM typy_klientow;
 DELETE FROM CENA;
 DELETE FROM PROMOCJE;
 DELETE FROM TYPY_KARNETOW;
+DELETE FROM REZERWACJE;
+DELETE FROM BILETY;
 DELETE FROM KLIENCI;
+DELETE FROM TYPY_SEKTOROW;
+DELETE FROM TYPY_IMPREZ;
+DELETE FROM typy_klientow;
+DELETE FROM zakupy;
+DELETE FROM karnety;
 
 drop sequence dept_seq;
 drop sequence dept_seq2;
 drop sequence dept_seq3;
 drop sequence dept_seq4;
 drop sequence dept_seq5;
+drop sequence dept_seq6;
 
 DROP trigger create_sek_aft_ins_stadiony;
 DROP trigger INCREMENT_stadiony_ID;
 DROP trigger INCREMENT_imprezy_ID;
+DROP trigger INCREMENT_zakupy_ID;
+DROP trigger INCREMENT_karnety_ID;
 DROP trigger create_msc_aft_ins_sektor;
-drop trigger create_ceny_aft_ins_imprezy;
+DROP trigger create_ceny_aft_ins_imprezy;
+DROP trigger create_rez_aft_ins_klienci;
+DROP trigger bilet_and_zakup_aft_ins_rez;
+DROP trigger karnety_aft_klienci;
 
 DROP procedure wstaw_do_typy_sektorow;
 DROP procedure wstaw_do_stadiony;
@@ -30,8 +40,8 @@ DROP procedure wstaw_do_typy_imprez;
 DROP procedure wstaw_do_imprezy;
 DROP procedure wstaw_do_typy_klientow;
 DROP procedure wstaw_do_promocje;
-DROP PROCEDURE wstaw_do_typy_karnetow;
-DROP PROCEDURE wstaw_do_klienci;
+DROP procedure wstaw_do_typy_karnetow;
+DROP procedure wstaw_do_klienci;
 
 /*SEKWENCJE*/
 CREATE SEQUENCE dept_seq START WITH 1;
@@ -39,17 +49,9 @@ CREATE SEQUENCE dept_seq2 START WITH 1;
 CREATE SEQUENCE dept_seq3 START WITH 1;
 CREATE SEQUENCE dept_seq4 START WITH 1;
 CREATE SEQUENCE dept_seq5 START WITH 1;
-
+CREATE SEQUENCE dept_seq6 START WITH 1;
 /*TRIGGERY*/
-create or replace TRIGGER INCREMENT_stadiony_ID
-BEFORE INSERT ON STADIONY
-FOR EACH ROW
-BEGIN
-  SELECT dept_seq.NEXTVAL
-  INTO   :new.ID_STADIONU
-  FROM   dual;
-END;
-/
+
 
 create or replace TRIGGER INCREMENT_imprezy_ID
 BEFORE INSERT ON imprezy
@@ -61,6 +63,67 @@ BEGIN
 END;
 /
 
+create or replace TRIGGER INCREMENT_rezerwacje_ID
+BEFORE INSERT ON rezerwacje
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq3.NEXTVAL
+  INTO   :new.id_rezerwacji
+  FROM   dual;
+END;
+/
+
+create or replace TRIGGER INCREMENT_klienci_ID
+BEFORE INSERT ON klienci
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq4.NEXTVAL
+  INTO   :new.id_klienta
+  FROM   dual;
+END;
+/
+
+create or replace TRIGGER INCREMENT_zakupy_ID
+BEFORE INSERT ON zakupy
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq5.NEXTVAL
+  INTO   :new.ID_ZAKUPU
+  FROM   dual;
+END;
+/
+
+create or replace TRIGGER INCREMENT_karnety_ID
+BEFORE INSERT ON karnety
+FOR EACH ROW
+BEGIN
+  SELECT dept_seq6.NEXTVAL
+  INTO   :new.ID_karnetu
+  FROM   dual;
+END;
+/
+
+create or replace trigger create_rez_aft_ins_klienci
+after insert on klienci
+for each row
+DECLARE
+rand_date DATE;
+end_date DATE;
+do_rez NUMBER;
+begin
+
+    FOR i IN 1..1 LOOP
+        
+        do_rez := DBMS_RANDOM.value(0,10);
+        if do_rez > 6 then
+        rand_date := TO_DATE(TRUNC(DBMS_RANDOM.value(TO_CHAR(date '2013-01-01','J'),TO_CHAR(DATE '2016-12-31','J'))),'J');
+        end_date := add_months(rand_date,1);
+		INSERT INTO REZERWACJE VALUES (i, rand_date, end_date, :NEW.id_klienta);
+        end if;
+        
+    end loop;
+end;
+/
 
 create or replace TRIGGER create_sek_aft_ins_stadiony
 AFTER INSERT ON STADIONY
@@ -82,7 +145,6 @@ BEGIN
         INSERT INTO SEKTORY(id_sektora ,id_typu, id_stadionu)
         VALUES (i, 3, :NEW.id_stadionu);
         end if;
-        
   END LOOP;
   DBMS_OUTPUT.put_line('Dodano wszystkie sektory.');
 END;
@@ -98,6 +160,7 @@ BEGIN
             INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
         END LOOP;
     END LOOP;
+
   end if;
   
   if :new.id_typu = 2 then 
@@ -114,7 +177,7 @@ BEGIN
             INSERT INTO MIEJSCA VALUES(i, j, :NEW.id_sektora, :NEW.id_stadionu);
         END LOOP;
     END LOOP;
-  end if;      
+  end if;   
   DBMS_OUTPUT.put_line('Dodano wszystkie miejsca dla sektora.');
 END;
 /
@@ -157,6 +220,127 @@ BEGIN
 END;
 /
 
+create or replace TRIGGER karnety_aft_klienci
+AFTER INSERT ON klienci
+for each row
+declare
+kup_karnet NUMBER;
+rand_date DATE;
+end_date DATE;
+jaki_karnet NUMBER;
+cena_wej NUMBER;
+okres_wyj NUMBER;
+cena_wyj NUMBER(20,2);
+rabat_wej NUMBER;
+id_promo NUMBER;
+begin
+    kup_karnet := round(dbms_random.value(1,10));
+    jaki_karnet := round(dbms_random.value(1,12));
+    
+    if kup_karnet > 7 then
+    rand_date := TO_DATE(TRUNC(DBMS_RANDOM.value(TO_CHAR(date '2013-01-01','J'),TO_CHAR(DATE '2016-12-31','J'))),'J');
+    
+    
+    SELECT cena, okres_waznosci into cena_wej, okres_wyj FROM typy_karnetow where id_typu_karnetu = jaki_karnet;
+    end_date := add_months(rand_date,okres_wyj);
+    select rabat, id_promocji into rabat_wej, id_promo from promocje where typy_klientow_id_typu = :new.typy_klientow_id_typu;
+    if rabat_wej > 0 then
+    cena_wyj := round(cena_wej*(rabat_wej*0.01),2);
+    else 
+    cena_wyj := round(cena_wej,2);
+    end if;
+    
+    INSERT INTO karnety (data_wystawienia, data_waznosci, cena, klienci_id_klienta, id_typu_klienta, typy_karnetow_id_typu, id_promocji) 
+        values (rand_date, end_date, cena_wyj,:new.id_klienta, :new.typy_klientow_id_typu, jaki_karnet, id_promo);
+    end if;
+end;
+/
+
+create or replace TRIGGER bilet_and_zakup_aft_ins_rez
+AFTER INSERT ON rezerwacje
+FOR EACH ROW
+DECLARE
+days_diff NUMBER;
+id_typu_klienta NUMBER;
+id_prom NUMBER;
+new_id_zak NUMBER;
+stad_id NUMBER;
+imp_id NUMBER;
+imp_data DATE;
+numer_sektora NUMBER;
+numer_rzedu NUMBER;
+numer_miejsca NUMBER;
+verification NUMBER;
+BEGIN
+    /*zakupy*/
+    SELECT ID_stadionu, Id_imprezy, data INTO stad_id, imp_id, imp_data FROM IMPREZY WHERE DATA > :new.data AND ROWNUM <= 1 ORDER BY DATA ASC NULLS LAST;
+    days_diff := imp_data - :new.data;
+    days_diff := round(days_diff/2);
+    INSERT INTO zakupy (data,id_klienta) VALUES(:new.data + days_diff,:new.id_klienta);
+    select id_zakupu into new_id_zak from zakupy where rowid=(select max(rowid) from zakupy);
+
+
+
+    /*bilety*/
+    numer_sektora := round(dbms_random.value(1,12));
+    verification := 0;
+
+    if (numer_sektora <=4) then
+
+        WHILE verification IS NOT NULL
+        LOOP
+            verification := NULL;
+            numer_rzedu := round(dbms_random.value(1,50));
+            numer_miejsca := round(dbms_random.value(1,100));
+            BEGIN
+                SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                verification := NULL;
+            END;
+        END LOOP;
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,new_id_zak);
+    end if;
+
+    if (numer_sektora > 4 and numer_sektora <= 8) then
+
+        WHILE verification IS NOT NULL
+        LOOP
+            verification := NULL;
+            numer_rzedu := round(dbms_random.value(1,100));
+            numer_miejsca := round(dbms_random.value(1,100));
+            BEGIN
+                SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                verification := NULL;
+            END;
+        END LOOP;
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,new_id_zak);
+    end if;
+
+    if (numer_sektora > 8 and numer_sektora <=12 ) then
+
+        WHILE verification IS NOT NULL
+        LOOP
+            verification := NULL;
+            numer_rzedu := round(dbms_random.value(1,50));
+            numer_miejsca := round(dbms_random.value(1,100));
+            BEGIN
+                SELECT Id_rezerwacji into verification FROM bilety where ID_stadionu = stad_id AND Id_imprezy = imp_id AND id_sektora = numer_sektora AND rzad = numer_rzedu AND numer_miejsca=numer_miejsca AND ROWNUM <= 1;
+            EXCEPTION
+                WHEN NO_DATA_FOUND THEN
+                verification := NULL;
+            END;
+        END LOOP;
+		INSERT INTO bilety VALUES(imp_id,stad_id,numer_sektora,numer_rzedu,numer_miejsca,:new.id_rezerwacji,new_id_zak);
+    end if;
+
+  DBMS_OUTPUT.put_line('Dodano bilet i zakup.');
+END;
+/
+
+
 /*PROCEDURY*/
 create or replace PROCEDURE wstaw_do_typy_sektorow
 IS
@@ -166,6 +350,7 @@ BEGIN
     INSERT INTO typy_sektorow VALUES (3, 'TYP 3','test_opis3');
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy sektorów.');
+COMMIT;
 END;
 /
 
@@ -191,9 +376,10 @@ BEGIN
 	'Expeditors International of Washington', 'Micron Technology', 'Bank of New York Mellon Corp.', 'Alcoa', 'Applied Materials', 'BB&T Corp.', 'Williams', 'Aflac', 'Procter & Gamble', 'Harris', 'Citigroup', 'CB Richard Ellis Group', 'New York Life Insurance', 'EMC', 'Gannett', 'PPL', 'Tech Data', 'Verizon Communications', 'Costco Wholesale', 'Jabil Circuit', 'Broadcom', 'Home Depot', 'Starwood Hotels & Resorts', 'Cisco Systems', 'Progress Energy', 'Northrop Grumman', 'Corning', 'Unum Group', 'AutoZone', 'Icahn Enterprises', 'Dell', 'Prudential Financial', 'Kimberly-Clark', 'Public Service Enterprise Group', 'Henry Schein', 'Arrow Electronics', 'Host Hotels & Resorts', 'General Mills', 'Ryder System', 'Kellogg', 'Ashland', 'PetSmart', 'CenterPoint Energy', 'SAIC', 'OfficeMax', 'Mohawk Industries', 'Masco', 'Wal-Mart Stores', 'Express Scripts', 'Stryker', 'Xcel Energy', 'BJ''s Wholesale Club', 
 	'FirstEnergy', 'Supervalu', 'Ball', 'Newmont Mining', 'Pitney Bowes', 'Eaton', 'Apollo Group', 'St. Jude Medical', 'Oneok', 'Nucor', 'Cameron International', 'Amgen', 'SPX', 'United Services Automobile Assn.', 'INTL FCStone', 'Regions Financial', 'Avaya', 'Southwest Airlines', 'State Farm Insurance Cos.', 'Omnicare', 'KeyCorp');
 	qname := name.count;
-	FOR i IN 1..2 LOOP
+	FOR i IN 1..2 LOOP /*liczba stadionow*/
 		INSERT INTO stadiony VALUES (i, name(i));
 	END LOOP;
+	COMMIT;
 	DBMS_OUTPUT.put_line('Dodano wszystkie stadiony.');
 END;
 /
@@ -207,6 +393,7 @@ BEGIN
     INSERT INTO typy_imprez VALUES (3, 'Występ','test_opis3');
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy imprez.');
+COMMIT;
 END;
 /
 
@@ -214,20 +401,21 @@ create or replace PROCEDURE wstaw_do_typy_karnetow
 IS
 BEGIN
 	
-    INSERT INTO typy_karnetow VALUES (1, 'Karnet Ligi Diamentowej Premium', 4000, DATE'2017-12-12', 'brak opisu', 1, 2);
-    INSERT INTO typy_karnetow VALUES (2, 'Karnet Ligi Diamentowej Normal', 3000, DATE'2017-12-12', 'brak opisu', 2, 2);
-    INSERT INTO typy_karnetow VALUES (3, 'Karnet Ligi Diamentowej Cheap', 2000, DATE'2017-12-12', 'brak opisu', 3, 2);
-    INSERT INTO typy_karnetow VALUES (4, 'Karnet Klubu Kabaretowego Premium', 200, DATE'2017-12-12', 'brak opisu', 1, 3);
-    INSERT INTO typy_karnetow VALUES (5, 'Karnet Klubu Kabaretowego Normal', 150, DATE'2017-12-12', 'brak opisu', 2, 3);
-    INSERT INTO typy_karnetow VALUES (6, 'Karnet Klubu Kabaretowego Cheap', 100, DATE'2017-12-12', 'brak opisu', 3, 3);
-    INSERT INTO typy_karnetow VALUES (7, 'Karnet Sezonu Piłkarskiego Premium',600, DATE'2017-12-12', 'brak opisu', 1, 2);
-    INSERT INTO typy_karnetow VALUES (8, 'Karnet Sezonu Piłkarskiego Normal',400, DATE'2017-12-12', 'brak opisu', 2, 2);
-    INSERT INTO typy_karnetow VALUES (9, 'Karnet Sezonu Piłkarskiego Cheap',200, DATE'2017-12-12', 'brak opisu', 3, 2);
-    INSERT INTO typy_karnetow VALUES (10, 'Karnet Koncertowy Premium',1000, DATE'2017-12-12', 'brak opisu', 1, 1);
-    INSERT INTO typy_karnetow VALUES (11, 'Karnet Koncertowy Normal',800, DATE'2017-12-12', 'brak opisu', 2, 1);
-    INSERT INTO typy_karnetow VALUES (12, 'Karnet Koncertowy Cheap',600, DATE'2017-12-12', 'brak opisu', 3, 1);
+    INSERT INTO typy_karnetow VALUES (1, 'Karnet Ligi Diamentowej Premium', 4000, 6, 'brak opisu', 1, 2);
+    INSERT INTO typy_karnetow VALUES (2, 'Karnet Ligi Diamentowej Normal', 3000, 6, 'brak opisu', 2, 2);
+    INSERT INTO typy_karnetow VALUES (3, 'Karnet Ligi Diamentowej Cheap', 2000, 6, 'brak opisu', 3, 2);
+    INSERT INTO typy_karnetow VALUES (4, 'Karnet Klubu Kabaretowego Premium', 200, 3, 'brak opisu', 1, 3);
+    INSERT INTO typy_karnetow VALUES (5, 'Karnet Klubu Kabaretowego Normal', 150, 3, 'brak opisu', 2, 3);
+    INSERT INTO typy_karnetow VALUES (6, 'Karnet Klubu Kabaretowego Cheap', 100, 3, 'brak opisu', 3, 3);
+    INSERT INTO typy_karnetow VALUES (7, 'Karnet Sezonu Piłkarskiego Premium',600, 9, 'brak opisu', 1, 2);
+    INSERT INTO typy_karnetow VALUES (8, 'Karnet Sezonu Piłkarskiego Normal',400, 9, 'brak opisu', 2, 2);
+    INSERT INTO typy_karnetow VALUES (9, 'Karnet Sezonu Piłkarskiego Cheap',200, 9, 'brak opisu', 3, 2);
+    INSERT INTO typy_karnetow VALUES (10, 'Karnet Koncertowy Premium',1000, 2, 'brak opisu', 1, 1);
+    INSERT INTO typy_karnetow VALUES (11, 'Karnet Koncertowy Normal',800, 2, 'brak opisu', 2, 1);
+    INSERT INTO typy_karnetow VALUES (12, 'Karnet Koncertowy Cheap',600, 2, 'brak opisu', 3, 1);
 	
 	DBMS_OUTPUT.put_line('Dodano wszystkie typy karnetów.');
+COMMIT;
 END;
 /
 
@@ -239,6 +427,7 @@ BEGIN
     INSERT INTO promocje VALUES (3, 'Zniżka dla emeryta',70,'70% zniżki od ceny oryginalnej',3);
     INSERT INTO promocje VALUES (4, 'Zniżka dla kombatanta',95,'90% zniżki od ceny oryginalnej',4);
 	DBMS_OUTPUT.put_line('Dodano wszystkie promocje.');
+COMMIT;
 END;
 /
 
@@ -269,6 +458,7 @@ BEGIN
         INSERT into imprezy values(j,nazwa(round(dbms_random.value(1,qnazwa))),add_months(dates(j),12*i),round(dbms_random.value(1,2)),round(dbms_random.value(1,3)),'test_opis');
     END LOOP;
   END LOOP;
+	COMMIT;
   DBMS_OUTPUT.put_line('Dodano wszystkie imprezy.');
 END;
 /
@@ -319,7 +509,7 @@ BEGIN
 	qsurname := nazwisko.count;
   
 
-	FOR i IN 1..5000 LOOP
+	FOR i IN 1..500 LOOP /*ilosc klientow */
 		tel_number := round(dbms_random.value(600000000,899999999));
         kierunkowy := round(dbms_random.value(1,999));
         rok_pesel := round(dbms_random.value(0,99));
@@ -377,8 +567,9 @@ BEGIN
         EMPTY_BLOB(),
         got_telefon,
         typ_klienta);
+        
+        COMMIT;
 	END LOOP;
   DBMS_OUTPUT.put_line('All klienci added.');
 END;
 /
-

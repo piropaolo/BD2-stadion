@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="71C4C303-39FF-0D71-F4D1-2B9619921A87" name="TYP_KARNETU">
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="0ECA8937-7251-0424-5FA8-854E4A6D3680" name="PROMOCJA">
 <createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 14:56:57 UTC</createdTime>
+<createdTime>2018-01-10 11:33:40 UTC</createdTime>
 <ownerDesignName>models</ownerDesignName>
 <engineerTo>
 <item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
@@ -15,9 +15,9 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="id_typu_karnetu" id="7B2415B2-271D-538A-1050-A5690373D421">
+<Attribute name="id_promocji" id="F80FAFE6-B980-FAD7-D971-F5D471A2BB99">
 <createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 14:57:15 UTC</createdTime>
+<createdTime>2018-01-10 11:33:53 UTC</createdTime>
 <ownerDesignName>models</ownerDesignName>
 <engineerTo>
 <item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
@@ -27,9 +27,9 @@
 <logicalDatatype>LOGDT019</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="nazwa" id="0598068B-5040-4BAA-6247-C3B36AC1E3F2">
+<Attribute name="nazwa" id="179AE8F2-7AC4-5AF4-9365-E666C7B08125">
 <createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 14:58:56 UTC</createdTime>
+<createdTime>2018-01-10 11:34:30 UTC</createdTime>
 <ownerDesignName>models</ownerDesignName>
 <engineerTo>
 <item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
@@ -40,9 +40,9 @@
 <dataTypeSize>30 CHAR</dataTypeSize>
 <ownDataTypeParameters>30 CHAR,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="cena" id="5D9AE547-F452-3987-631E-7930BFB16FC7">
+<Attribute name="rabat" id="59D07897-1F63-2478-9B65-9F972880B963">
 <createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 15:04:59 UTC</createdTime>
+<createdTime>2018-01-10 11:34:48 UTC</createdTime>
 <ownerDesignName>models</ownerDesignName>
 <engineerTo>
 <item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
@@ -50,25 +50,11 @@
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
-<dataTypePrecision>20</dataTypePrecision>
-<dataTypeScale>2</dataTypeScale>
-<ownDataTypeParameters>,20,2</ownDataTypeParameters>
-</Attribute>
-<Attribute name="okres_waznosci" id="7F030149-46B4-6D3C-D541-F64070AAEC08">
-<createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 15:08:48 UTC</createdTime>
-<ownerDesignName>models</ownerDesignName>
-<engineerTo>
-<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
-</engineerTo>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT014</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="opis" id="1567C279-02A4-3B95-5CE9-6030BCE9F20E">
+<Attribute name="opis" id="C73A196D-BE29-5C2D-53AB-096FC2CBEEBA">
 <createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 14:58:21 UTC</createdTime>
+<createdTime>2018-01-10 11:35:16 UTC</createdTime>
 <ownerDesignName>models</ownerDesignName>
 <engineerTo>
 <item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
@@ -80,29 +66,16 @@
 <dataTypeSize>150 CHAR</dataTypeSize>
 <ownDataTypeParameters>150 CHAR,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="id_typu_sektora" id="D63D47D4-86D4-1B3A-C422-C58C6CBC2F2C">
+<Attribute name="id_typu_klienta" id="74F7CB4C-6CF0-49DA-907B-4CB7D3DB8D3E">
 <createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 14:59:46 UTC</createdTime>
-<generatorID>4D54C357-B54E-6492-495F-E7D73423EA6A</generatorID>
+<createdTime>2018-01-10 11:39:50 UTC</createdTime>
+<generatorID>4C762102-4E03-25C3-0505-78E45DBF2C8B</generatorID>
 <ownerDesignName>models</ownerDesignName>
 <engineerTo>
 <item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
 </engineerTo>
-<referedAttribute>A1243D44-7F5B-5E2A-046A-74266C2F8E36</referedAttribute>
-<useDomainConstraints>false</useDomainConstraints>
-<use>1</use>
-<logicalDatatype>LOGDT019</logicalDatatype>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
-</Attribute>
-<Attribute name="id_typu_imprezy" id="EBD380E6-2AF7-C152-4F66-66EDBCA82358">
-<createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 15:00:43 UTC</createdTime>
-<generatorID>91511614-B233-5A3F-1DEE-DD3E69C60BA8</generatorID>
-<ownerDesignName>models</ownerDesignName>
-<engineerTo>
-<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
-</engineerTo>
-<referedAttribute>C0EC0071-6C71-3064-E2DF-FB1899E24D6D</referedAttribute>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>D74CB0B8-DC0E-A7E1-8428-360966232AA6</referedAttribute>
 <useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT019</logicalDatatype>
@@ -110,16 +83,17 @@
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="6FF07396-0CD3-3580-5FA8-87A29599C6DB" name="TYP_KARNETU PK">
+<identifier id="16BFD5BF-AA57-81F1-665A-09A4F1EF8677" name="PROMOCJA PK">
 <createdBy>koraxiss</createdBy>
-<createdTime>2017-12-22 14:57:39 UTC</createdTime>
+<createdTime>2018-01-10 11:34:08 UTC</createdTime>
 <ownerDesignName>models</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
 <engineerTo>
-<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="true"/>
+<item key="322D920D-BC6D-A258-9088-B5D869CB8C50" value="false"/>
 </engineerTo>
 <pk>true</pk>
 <usedAttributes>
-<attributeRef>7B2415B2-271D-538A-1050-A5690373D421</attributeRef>
+<attributeRef>F80FAFE6-B980-FAD7-D971-F5D471A2BB99</attributeRef>
 </usedAttributes>
 </identifier>
 </identifiers>
