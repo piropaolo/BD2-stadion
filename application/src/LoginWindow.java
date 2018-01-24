@@ -1,5 +1,3 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,7 +7,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Pair;
@@ -51,17 +48,13 @@ public class LoginWindow {
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 6);
 
-        btn.setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent e) {
-                username = userTextField.getText();
-                password = pwBox.getText();
-                stage.close();
-            }
+        btn.setOnAction(e -> {
+            username = userTextField.getText();
+            password = pwBox.getText();
+            stage.close();
         });
 
         stage.showAndWait();
-        return new Pair<String, String>(username, password);
+        return new Pair<>(username, password);
     }
 }
