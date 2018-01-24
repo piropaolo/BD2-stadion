@@ -10,10 +10,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Pair;
 
 public class LoginWindow {
-    public void setStage(Stage stage){
+    private String username;
+    private String password;
+
+    public Pair<String, String> setStage(){
+        Stage stage = new Stage();
         stage.setTitle("Database Login");
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -42,14 +48,20 @@ public class LoginWindow {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 4);
 
+        final Text actiontarget = new Text();
+        grid.add(actiontarget, 1, 6);
 
         btn.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent e) {
-                actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Sign in button pressed");
+                username = userTextField.getText();
+                password = pwBox.getText();
+                stage.close();
             }
         });
+
+        stage.showAndWait();
+        return new Pair<String, String>(username, password);
     }
 }
