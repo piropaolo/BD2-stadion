@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class DatabaseConnection {
 
-    public static void connect(String username, String password) throws SQLException {
+    public static Connection connect(String username, String password) throws SQLException {
         System.out.println("-------- Oracle JDBC Connection Testing ------");
 
         try {
@@ -15,7 +15,7 @@ public class DatabaseConnection {
 
             System.out.println("Where is your Oracle JDBC Driver?");
             e.printStackTrace();
-            return;
+            return null;
 
         }
         Scanner scanner = null;
@@ -41,29 +41,30 @@ public class DatabaseConnection {
 
             System.out.println("Connection Failed! Check output console");
             e.printStackTrace();
-            return;
+            return null;
 
         }
 
-        if (connection != null) {
-            System.out.println("You made it, take control your database now!");
-        } else {
-            System.out.println("Failed to make connection!");
-        }
-
-        Statement statement = null;
-
-        try {
-            statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT count(*) from imprezy");
-            rs.next();
-            int result = rs.getInt(1);
-            System.out.println(result);
-            if (statement != null) statement.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
-        if (connection != null) connection.close();
+//        if (connection != null) {
+//            System.out.println("You made it, take control your database now!");
+//        } else {
+//            System.out.println("Failed to make connection!");
+//        }
+//
+//        Statement statement = null;
+//
+//        try {
+//            statement = connection.createStatement();
+//            ResultSet rs = statement.executeQuery("SELECT count(*) from imprezy");
+//            rs.next();
+//            int result = rs.getInt(1);
+//            System.out.println(result);
+//            if (statement != null) statement.close();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            System.exit(-1);
+//        }
+//        if (connection != null) connection.close();
+        return connection;
     }
 }
