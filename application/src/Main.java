@@ -15,18 +15,29 @@ public class Main extends Application {
     public void start(Stage primaryStage){
         LoginWindow loginWindow = new LoginWindow();
         Pair<String, String> loginInfo = loginWindow.setStage();
-        System.out.println(loginInfo.getKey() + " " + loginInfo.getValue());
-        try {
-            connection = DatabaseConnection.connect(loginInfo.getKey(), loginInfo.getKey());
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(loginInfo.getKey() == null || loginInfo.getValue() == null){
+            System.out.println("Application will now close");
+            System.exit(0);
         }
-        if(connection == null){
-            System.out.println("Connection failed");
-        }
-        else{
-            System.out.println("Connection successful");
-        }
+//        try {
+//            connection = DatabaseConnection.connect(loginInfo.getKey(), loginInfo.getKey());
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        if(connection == null){
+//            System.out.println("Connection failed");
+//            System.exit(-1);
+//        }
+//        System.out.println("Connection successful");
+//        while(true){
+            MainWindow mainWindow = new MainWindow();
+            String activityName = mainWindow.setWindow();
+            switch(activityName){
+                case "Exit":
+                    System.out.println("Application will now close");
+                    System.exit(0);
+            }
+//        }
 //        primaryStage.show();
     }
 }
