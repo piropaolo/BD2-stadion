@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class DatabaseConnection {
 
-    public static void connect() throws SQLException {
+    public static void connect(String username, String password) throws SQLException {
         System.out.println("-------- Oracle JDBC Connection Testing ------");
 
         try {
@@ -26,8 +26,6 @@ public class DatabaseConnection {
             e.printStackTrace();
         }
 
-        String username = scanner.nextLine();
-        String password = scanner.nextLine();
         String url = scanner.nextLine();
         String port = scanner.nextLine();
         String sid = scanner.nextLine();
