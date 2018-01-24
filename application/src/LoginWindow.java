@@ -1,3 +1,4 @@
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -5,10 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Pair;
 
 public class LoginWindow {
@@ -45,13 +49,25 @@ public class LoginWindow {
         hbBtn.getChildren().add(btn);
         grid.add(hbBtn, 1, 4);
 
-        final Text actiontarget = new Text();
-        grid.add(actiontarget, 1, 6);
-
         btn.setOnAction(e -> {
             username = userTextField.getText();
             password = pwBox.getText();
             stage.close();
+        });
+
+        scene.addEventHandler(KeyEvent.KEY_PRESSED, t -> {
+            if(t.getCode()== KeyCode.ESCAPE)
+            {
+                stage.close();
+                username = null;
+                password = null;
+            }
+        });
+
+        stage.setOnCloseRequest(we -> {
+            stage.close();
+            username = null;
+            password = null;
         });
 
         stage.showAndWait();
