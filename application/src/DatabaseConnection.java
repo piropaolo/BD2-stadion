@@ -5,12 +5,10 @@ import java.util.Scanner;
 
 public class DatabaseConnection {
 
-    public static void main(String[] argv) throws SQLException {
-
+    public static void connect() throws SQLException {
         System.out.println("-------- Oracle JDBC Connection Testing ------");
 
         try {
-
             Class.forName("oracle.jdbc.driver.OracleDriver");
 
         } catch (ClassNotFoundException e) {
@@ -63,11 +61,11 @@ public class DatabaseConnection {
             rs.next();
             int result = rs.getInt(1);
             System.out.println(result);
-            if(statement != null) statement.close();
+            if (statement != null) statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(-1);
         }
-        if(connection != null) connection.close();
+        if (connection != null) connection.close();
     }
 }
