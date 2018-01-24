@@ -32,17 +32,33 @@ public class DatabaseConnection {
 
         Connection connection = null;
 
+        String usrname, passwd;
         try {
-
-            connection = DriverManager.getConnection(
-                    "jdbc:oracle:thin:" + username + "/" + password + "@" + url + ":" + port + ":" + sid);
-
-        } catch (SQLException e) {
-
-            System.out.println("Connection Failed! Check output console");
+            scanner = new Scanner(new File("passwd"));
+            usrname = scanner.nextLine();
+            passwd = scanner.nextLine();
+        }
+        catch (FileNotFoundException e){
+            usrname = null;
+            passwd = null;
             e.printStackTrace();
-            return null;
+        }
+        if (username.equals(usrname) && password.equals(passwd)) {
+            try {
 
+                connection = DriverManager.getConnection(
+                        "jdbc:oracle:thin:" + username + "/" + password + "@" + url + ":" + port + ":" + sid);
+
+            } catch (SQLException e) {
+
+                System.out.println("Connection Failed! Check output console");
+                e.printStackTrace();
+                return null;
+
+            }
+        }
+        else {
+            System.out.println("Incorrect credentials.");
         }
 
 //        if (connection != null) {
